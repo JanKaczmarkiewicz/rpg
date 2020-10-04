@@ -2,14 +2,13 @@
   "name": "rpg",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:editor": "cd packages/editor/ && npm run dev",
+    "test": "lerna run test",
+    "dev": "lerna run dev"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JanKaczmarkiewicz/rpg.git"
-  },
+  "private": true,
   "author": "JanKaczmarkiewicz",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "lerna": "^3.22.1"
   }
