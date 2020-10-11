@@ -4,12 +4,26 @@
   "scripts": {
     "dev:editor": "cd packages/editor/ && npm run dev",
     "test": "lerna run test",
-    "dev": "lerna run dev"
+    "dev:all": "lerna run dev",
+    "add": "lerna add",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx ./",
+    "bootstrap": "lerna bootstrap",
+    "remove": "lerna uninstall"
   },
   "private": true,
   "author": "JanKaczmarkiewicz",
   "license": "MIT",
   "dependencies": {
     "lerna": "^3.22.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.4.0",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-typescript": "^11.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8"
   }
 }
