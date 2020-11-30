@@ -1,7 +1,19 @@
-import React, { FunctionComponent } from "react";
+import React, { CSSProperties, FunctionComponent } from 'react';
+import mapGenerator from '../mapGenerator';
 
-const EditedMap: FunctionComponent = () => {
-  return <div>edited map</div>;
+const map = mapGenerator();
+
+const mapContainerStyle: CSSProperties = {
+  display: 'grid',
+  grid: `repeat(${map.config.MAP_SIZE}, ${map.config.TILE_SIZE}) / repeat(${map.config.MAP_SIZE}, ${map.config.TILE_SIZE})`,
 };
+
+const EditedMap: FunctionComponent = () => (
+  <div style={mapContainerStyle}>
+    {
+
+}
+  </div>
+);
 
 export default EditedMap;
