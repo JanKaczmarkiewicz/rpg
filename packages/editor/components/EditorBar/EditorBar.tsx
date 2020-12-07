@@ -1,10 +1,5 @@
-import { Drawer } from '@material-ui/core';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import { FunctionComponent } from 'react';
 
-const EditorBar: FunctionComponent = () => {
-  const [open, setOpen] = useState<boolean>(false);
-
-  return <Drawer open />;
-};
+const EditorBar: FunctionComponent = () => ' XD;';
 
 export default EditorBar;
