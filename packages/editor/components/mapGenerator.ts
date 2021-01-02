@@ -24,7 +24,7 @@ type Wall = {
   sprite: string,
 };
 
-type Tile = {
+export type Tile = {
   content: Enemy | Wall | Tresure | null,
   sprite: string
 };
