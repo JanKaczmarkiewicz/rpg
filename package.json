@@ -4,11 +4,7 @@
   "scripts": {
     "dev:editor": "cd packages/editor/ && npm run dev",
     "test": "lerna run test",
-    "dev:all": "lerna run dev",
-    "add": "lerna add",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx ./",
-    "bootstrap": "lerna bootstrap",
-    "remove": "lerna uninstall",
     "eslint-check": "eslint --print-config path/to/main.js | eslint-config-prettier-check"
   },
   "private": true,
@@ -18,6 +14,7 @@
     "typescript": "^4.1.2"
   },
   "devDependencies": {
+    "@types/node": "^14.14.19",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.4.0",
     "eslint": "^7.11.0",
