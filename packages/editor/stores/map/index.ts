@@ -9,7 +9,7 @@ const map = mapGenerator();
 export const config = {
     map: {
         backgroundImageUrl: loadImage('mocked-map', 'png'),
-        tileSize: 32,
+        tileSize: 48,
         offset: {
             top: 1,
             left: 1,
@@ -25,7 +25,7 @@ export const config = {
                         id: `${i}-${j}`,
                         x: i,
                         y: j,
-                        isMoveable: false,
+                        isMoveable: true,
                     })),
             ),
     },
