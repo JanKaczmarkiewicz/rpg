@@ -1,17 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { selectMapBackground, selectMapSize } from '../../stores/map/selectors';
-import { Background, BackgroundWrapper } from './styles';
+import { useScale } from '../../hooks/useScale';
+import { selectMapBackground, selectMapHeight, selectMapWidth } from '../../stores/map/selectors';
+import { Background } from './styles';
 
 const MapBackground: FunctionComponent = () => {
-    const { height, width } = useSelector(selectMapSize);
+    const height = useSelector(selectMapHeight);
+    const width = useSelector(selectMapWidth);
     const backgroundUrl = useSelector(selectMapBackground);
+    const scale = useScale();
 
-    return (
-        <BackgroundWrapper>
-            <Background src={backgroundUrl} height={height} width={width} />
-        </BackgroundWrapper>
-    );
+    return <Background src={backgroundUrl} height={scale(height)} width={scale(width)} />;
 };
 
 export default MapBackground;

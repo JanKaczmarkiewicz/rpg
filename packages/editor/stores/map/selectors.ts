@@ -3,22 +3,16 @@ import { State } from './types';
 export const selectTileSize = (state: State): number => state.map.tileSize;
 export const selectMapVerticalSize = (state: State): number => state.map.tiles.length;
 export const selectMapHorizontalSize = (state: State): number => state.map.tiles[0].length;
-export const selectTiles = (state: State): State['map']['tiles'] => state.map.tiles;
-export const selectMapOffset = (state: State): State['map']['offset'] => state.map.offset;
-
-export const selectMapBackground = (state: State): string => state.map.backgroundImageUrl;
-
-export const selectMapSize = (state: State) => {
-    const tileSize = selectTileSize(state);
-    const horizontalSize = selectMapHorizontalSize(state);
+export const selectMapHeight = (state: State): number => {
     const verticalSize = selectMapVerticalSize(state);
     const offset = selectMapOffset(state);
-
-    const width = tileSize * horizontalSize + offset.left * tileSize + offset.right * tileSize;
-    const height = tileSize * verticalSize + offset.top * tileSize + offset.bottom * tileSize;
-
-    return {
-        height,
-        width,
-    };
+    return verticalSize + offset.top + offset.bottom;
 };
+export const selectMapWidth = (state: State): number => {
+    const horizontalSize = selectMapHorizontalSize(state);
+    const offset = selectMapOffset(state);
+    return horizontalSize + offset.left + offset.right;
+};
+export const selectTiles = (state: State): State['map']['tiles'] => state.map.tiles;
+export const selectMapOffset = (state: State): State['map']['offset'] => state.map.offset;
+export const selectMapBackground = (state: State): string => state.map.backgroundImageUrl;

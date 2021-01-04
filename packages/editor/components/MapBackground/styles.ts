@@ -10,7 +10,3 @@ export const Background = styled.img<{ height: CSSProperties['height']; width: C
     left: 0;
     right: 0;
 `;
-
-export const BackgroundWrapper = styled.div`
-    position: relative;
-`;
