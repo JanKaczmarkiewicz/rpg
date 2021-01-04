@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
 
-const EditorBar: FunctionComponent = () => ' XD;';
+const EditorBar: FunctionComponent = () => '';
 
 export default EditorBar;

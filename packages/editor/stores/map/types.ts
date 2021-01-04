@@ -1,3 +1,3 @@
-import mapGenerator from "../../components/mapGenerator";
+import { config } from ".";
 
-export type State = {map: ReturnType<typeof mapGenerator>}
+export type State = typeof config;
