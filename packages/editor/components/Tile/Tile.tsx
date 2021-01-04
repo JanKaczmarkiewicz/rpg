@@ -1,19 +1,15 @@
 import React, { FunctionComponent } from "react";
 import { loadImage } from "../../helpers/loadImage";
-import { Tile as TileData } from "../mapGenerator";
+import { State } from "../../stores/map/types";
 import { TileSprite, TileWrapper } from "./styles";
 
-const Tile: FunctionComponent<{ tile: TileData; size: number }> = ({
-  tile,
-  size,
-}) => (
+const Tile: FunctionComponent<{
+  tile: State["map"]["tiles"][0][0];
+  size: number;
+}> = ({ tile, size }) => (
   <TileWrapper>
-    {tile.content && (
-      <TileSprite
-        src={loadImage(tile.content.sprite)}
-        alt={tile.content.sprite}
-        size={size}
-      />
+    {tile.isMoveable && (
+      <TileSprite src={loadImage("wall")} alt="wall" size={size} />
     )}
   </TileWrapper>
 );

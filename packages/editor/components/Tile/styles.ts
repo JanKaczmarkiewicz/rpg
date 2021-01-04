@@ -6,6 +6,6 @@ export const TileSprite = styled.img<{ size: number }>`
   bottom: 0;
 `;
 
- export const TileWrapper = styled.div`
+export const TileWrapper = styled.div`
   position: relative;
 `;

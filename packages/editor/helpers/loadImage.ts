@@ -1,5 +1,1 @@
-
-
-export const loadImage = (relPath: string) => 
-  `/assets/sprites/${relPath}.svg`;
-
+export const loadImage = (relPath: string, extension: string = 'svg') => `/assets/sprites/${relPath}.${extension}`;

@@ -1,27 +1,15 @@
-import React, { FunctionComponent } from "react";
-import { useSelector } from "react-redux";
-import {
-  selectMapSize,
-  selectTiles,
-  selectTileSize,
-} from "../../stores/map/selectors";
-import Tile from "../Tile/Tile";
-import { MapGridContainer } from "./styles";
+import React, { FunctionComponent } from 'react';
+import MapBackground from '../MapBackground/MapBackground';
+import MapGrid from '../MapGrid/MapGrid';
+import { GameMap } from './styles';
 
 const EditedMap: FunctionComponent = () => {
-  const tileSize = useSelector(selectTileSize);
-  const mapSize = useSelector(selectMapSize);
-  const tiles = useSelector(selectTiles);
-
-  return (
-    <MapGridContainer tileSize={tileSize} mapSize={mapSize}>
-      {tiles.flatMap((row, i) =>
-        row.map((tile, j) => (
-          <Tile key={`${i}-${j}`} tile={tile} size={tileSize} />
-        ))
-      )}
-    </MapGridContainer>
-  );
+    return (
+        <GameMap>
+            <MapBackground />
+            <MapGrid />
+        </GameMap>
+    );
 };
 
 export default EditedMap;

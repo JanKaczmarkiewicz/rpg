@@ -1,6 +1,6 @@
 import React from "react";
-import { store } from "../stores/map";
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux';
+import { store } from '../stores/map';
 
 function MyApp({ Component, pageProps }) {
   return (
