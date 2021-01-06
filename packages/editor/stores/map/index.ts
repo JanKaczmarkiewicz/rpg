@@ -25,7 +25,7 @@ export const config = {
                         id: `${i}-${j}`,
                         x: i,
                         y: j,
-                        isMoveable: true,
+                        isMoveable: false,
                     })),
             ),
     },
