@@ -8,7 +8,7 @@ const Tile: FunctionComponent<{
     size: number;
 }> = ({ tile, size }) => (
     <TileWrapper>
-        {tile.isMoveable && <TileSprite src={loadImage('wall', 'svg')} alt="wall" size={size} />}
+        {tile.isMoveable ? <TileSprite src={loadImage('wall', 'svg')} alt="wall" size={size} /> : null}
         <TileTooltip />
     </TileWrapper>
 );
