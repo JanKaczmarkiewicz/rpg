@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { loadImage } from '../../helpers/loadImage';
-import { State } from '../../stores/map/types';
+import { State } from '../../store/map/types';
 import { TileSprite, TileTooltip, TileWrapper } from './styles';
 
 const Tile: FunctionComponent<{
@@ -8,7 +8,7 @@ const Tile: FunctionComponent<{
     size: number;
 }> = ({ tile, size }) => (
     <TileWrapper>
-        {tile.isMoveable ? <TileSprite src={loadImage('wall', 'svg')} alt="wall" size={size} /> : null}
+        {tile.collision ? <TileSprite src={loadImage('wall', 'svg')} alt="wall" size={size} /> : null}
         <TileTooltip />
     </TileWrapper>
 );

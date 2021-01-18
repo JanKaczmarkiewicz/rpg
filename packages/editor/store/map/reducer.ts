@@ -1,10 +1,9 @@
-import { createStore } from 'redux';
-
-import { State } from './types';
-import mapGenerator from '../../components/mapGenerator';
+import produce from 'immer';
 import { loadImage } from '../../helpers/loadImage';
+import { setTileCollisionMutation, SET_TILE_COLLISION } from './actions/setTileCollision';
+import { State, Action } from './types';
 
-const map = mapGenerator();
+type Reducer = (state: State, action: Action) => State;
 
 export const config = {
     map: {
@@ -25,12 +24,19 @@ export const config = {
                         id: `${i}-${j}`,
                         x: i,
                         y: j,
-                        isMoveable: false,
+                        collision: false,
                     })),
             ),
     },
 };
 
-const reducer = (state: State = config, _action) => state;
+const MUTATIONS_MAP = {
+    [SET_TILE_COLLISION]: setTileCollisionMutation,
+};
 
-export const store = createStore(reducer);
+const reducer: Reducer = (state = config, action) =>
+    produce(state, (draft) => {
+        MUTATIONS_MAP[action.type](draft, action.payload);
+    });
+
+export default reducer;

@@ -1,7 +1,8 @@
-import { AppBar, Box, Drawer, Toolbar } from '@material-ui/core';
+import React from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import React from 'react';
+import { AppBar, Box, Drawer, Toolbar } from '@material-ui/core';
+
 import EditedMap from '../components/EditedMap/EditedMap';
 import EditorBar from '../components/EditorBar/EditorBar';
 

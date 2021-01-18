@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useScale } from '../../hooks/useScale';
-import { selectMapBackground, selectMapHeight, selectMapWidth } from '../../stores/map/selectors';
+import { selectMapBackground, selectMapHeight, selectMapWidth } from '../../store/map/selectors';
 import { Background } from './styles';
 
 const MapBackground: FunctionComponent = () => {

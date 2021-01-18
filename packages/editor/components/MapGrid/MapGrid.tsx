@@ -7,7 +7,7 @@ import {
     selectMapVerticalSize,
     selectTiles,
     selectTileSize,
-} from '../../stores/map/selectors';
+} from '../../store/map/selectors';
 import Tile from '../Tile/Tile';
 import { Grid } from './styles';
 
