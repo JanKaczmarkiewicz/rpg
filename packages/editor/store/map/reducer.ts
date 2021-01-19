@@ -1,9 +1,7 @@
 import produce from 'immer';
 import { loadImage } from '../../helpers/loadImage';
 import { setTileCollisionMutation, SET_TILE_COLLISION } from './actions/setTileCollision';
-import { State, Action } from './types';
-
-type Reducer = (state: State, action: Action) => State;
+import { Reducer } from './types';
 
 export const config = {
     map: {
