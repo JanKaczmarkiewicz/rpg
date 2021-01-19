@@ -34,9 +34,14 @@ const MUTATIONS_MAP = {
     [SET_TILE_COLLISION]: setTileCollisionMutation,
 };
 
-const reducer: Reducer = (state = config, action) =>
-    produce(state, (draft) => {
-        MUTATIONS_MAP[action.type](draft, action.payload);
+const reducer: Reducer = (state = config, action) => {
+    const mutation = MUTATIONS_MAP[action.type];
+
+    if (!mutation) return state;
+
+    return produce(state, (draft) => {
+        mutation(draft, action.payload);
     });
+};
 
 export default reducer;
