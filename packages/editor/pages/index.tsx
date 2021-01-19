@@ -16,6 +16,7 @@ function Home() {
             <Header />
             <LeftMenu />
             <main>
+                <Toolbar />
                 <EditedMap />
             </main>
         </div>
