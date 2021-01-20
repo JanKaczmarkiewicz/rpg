@@ -20,8 +20,8 @@ export const config = {
                     .fill(null)
                     .map((__, j) => ({
                         id: `${i}-${j}`,
-                        x: i,
-                        y: j,
+                        x: j,
+                        y: i,
                         collision: false,
                     })),
             ),
