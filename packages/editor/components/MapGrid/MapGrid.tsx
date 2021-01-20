@@ -18,7 +18,7 @@ const MapGrid: FunctionComponent = () => {
     const tileSize = useSelector(selectTileSize);
     const mapHorizontalSize = useSelector(selectMapHorizontalSize);
     const mapVerticalSize = useSelector(selectMapVerticalSize);
-    const tiles = useSelector(selectTiles, () => true);
+    const tiles = useSelector(selectTiles);
     const offset = useSelector(selectMapOffset);
     const scale = useScale();
 
