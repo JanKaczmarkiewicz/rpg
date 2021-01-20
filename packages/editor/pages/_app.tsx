@@ -1,13 +1,19 @@
-import React from "react";
+import React from 'react';
+// Providers
 import { Provider } from 'react-redux';
-import { store } from '../stores/map';
+import { ThemeProvider } from '@material-ui/core';
+// Values
+import store from '../store';
+import theme from '../theme/muiTheme';
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
-  );
-}
+const App = ({ Component, pageProps }) => {
+    return (
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <Component {...pageProps} />
+            </ThemeProvider>
+        </Provider>
+    );
+};
 
-export default MyApp;
+export default App;
