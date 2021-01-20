@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { ZIndex } from '../../constants/constants';
 
 export const TileSprite = styled.img<{ size: number }>`
     width: ${({ size }) => size}px;
@@ -11,7 +10,7 @@ const BORDER_SIZE = 1;
 export const TileTooltip = styled.div`
     height: 100%;
     width: 100%;
-    z-index: ${ZIndex.TileTooltip};
+    z-index: ${({ theme }) => theme.zIndex.tileTooltip};
     position: absolute;
     top: 0;
     bottom: 0;
