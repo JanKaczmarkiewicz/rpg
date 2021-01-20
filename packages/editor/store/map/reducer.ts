@@ -7,16 +7,10 @@ export const config = {
     map: {
         backgroundImageUrl: loadImage('mocked-map', 'png'),
         tileSize: 48,
-        offset: {
-            top: 1,
-            left: 1,
-            bottom: 1,
-            right: 1,
-        },
-        tiles: Array(14)
+        tiles: Array(16)
             .fill(null)
             .map((_, i) =>
-                Array(22)
+                Array(24)
                     .fill(null)
                     .map((__, j) => ({
                         id: `${i}-${j}`,

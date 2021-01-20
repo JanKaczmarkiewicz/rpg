@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useScale } from '../../hooks/useScale';
-import { selectMapBackground, selectMapHeight, selectMapWidth } from '../../store/map/selectors';
+import { selectMapBackground, selectMapHorizontalSize, selectMapVerticalSize } from '../../store/map/selectors';
 import { Background } from './styles';
 
 const MapBackground: FunctionComponent = () => {
-    const height = useSelector(selectMapHeight);
-    const width = useSelector(selectMapWidth);
+    const width = useSelector(selectMapHorizontalSize);
+    const height = useSelector(selectMapVerticalSize);
     const backgroundUrl = useSelector(selectMapBackground);
     const scale = useScale();
 
