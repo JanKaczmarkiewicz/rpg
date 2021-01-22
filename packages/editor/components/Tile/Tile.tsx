@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { loadImage } from '../../helpers/loadImage';
-import { State } from '../../store/map/types';
+import { EditMode, TileData } from '../../store/map/types';
 import { TileSprite, TileTooltip, TileWrapper } from './styles';
-
-type TileData = State['map']['tiles'][0][0];
 
 export type TileProps = {
     tile: TileData;
     size: number;
+    mode: EditMode;
     onClick: (tile: TileData) => void;
 };
 

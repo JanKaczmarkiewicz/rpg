@@ -1,13 +1,16 @@
-import React, { createElement, FunctionComponent, useState } from 'react';
+import React, { createElement, FunctionComponent } from 'react';
 import { Box, Button } from '@material-ui/core';
-import { EditMode } from './constants';
 import { useLocalize } from '../../localization/useLocalize';
+import { EditMode } from '../../store/map/types';
 
 // Blades
 import MainMenuBlade from './blades/MainMenu/MainMenu';
 import NpcsEditor from './blades/NpcsEditor/NpcsEditor';
 import EnemiesEditor from './blades/EnemiesEditor/EnemiesEditor';
 import CollisionsEditor from './blades/CollisionsEditor/CollisionsEditor';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectEditorData } from '../../store/map/selectors';
+import { setEditorMode } from '../../store/map/actions/setEditorMode';
 
 const BLADES = {
     [EditMode.Collision]: CollisionsEditor,
@@ -16,19 +19,25 @@ const BLADES = {
 };
 
 const EditorBar: FunctionComponent = () => {
-    const [mode, setMode] = useState<null | EditMode>(null);
     const localize = useLocalize();
+    const dispatch = useDispatch();
+
+    const { mode, ...editorProps } = useSelector(selectEditorData);
 
     const onBackClick = (): void => {
-        setMode(null);
+        dispatch(setEditorMode({ mode: null }));
+    };
+
+    const onMenuItemClick = (mode: EditMode): void => {
+        dispatch(setEditorMode({ mode }));
     };
 
     const getBlade = (): React.ReactNode => {
-        if (!mode) return <MainMenuBlade onMenuItemClick={setMode} />;
+        if (!mode) return <MainMenuBlade onMenuItemClick={onMenuItemClick} />;
         return (
             <>
                 <Button onClick={onBackClick}>{localize('back')}</Button>
-                {createElement(BLADES[mode])}
+                {createElement(BLADES[mode], editorProps)}
             </>
         );
     };

@@ -7,7 +7,7 @@ import {
 } from '@material-ui/icons';
 import { LocalizeKey, useLocalize } from '../../../../localization/useLocalize';
 import SectionTitle from '../../common/SectionTitle';
-import { EditMode } from '../../constants';
+import { EditMode } from '../../../../store/map/types';
 
 const options: { optionTextKey: LocalizeKey; icon: ReactNode; mode: EditMode }[] = [
     { optionTextKey: 'editWalls', icon: <ViewQuiltIcon />, mode: EditMode.Collision },
