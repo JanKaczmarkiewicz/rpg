@@ -1,8 +1,8 @@
-import { CharacterDefinition } from './types';
+import { ContentType, Enemy } from '../../store/map/types';
 
 const produceCharacterName = (url: string): string => url.split('/').slice(-1)[0].split('.')[0];
 
-export const characters: CharacterDefinition[] = [
+export const characters: Enemy[] = [
     'https://www.margonem.pl/obrazki/npc/pot/st-puma.gif',
     'https://www.margonem.pl/obrazki/npc/pot/demonszef.gif',
     'https://www.margonem.pl/obrazki/npc/hum/gobmag2.gif',
@@ -88,9 +88,21 @@ export const characters: CharacterDefinition[] = [
     'https://www.margonem.pl/obrazki/npc/pot/wl-mrozu01.gif',
     'https://www.margonem.pl/obrazki/npc/pot/wl-mrozu02.gif',
     'https://www.margonem.pl/obrazki/npc/pot/wl-mrozu03.gif',
+    'https://www.margonem.pl/obrazki/npc/pot/titanharpy.gif',
+    'https://www.margonem.pl/obrazki/npc/pot/killerrabbit.gif',
+    'https://www.margonem.pl/obrazki/npc/woj/titanbandit.gif',
+    'https://www.margonem.pl/obrazki/npc/pot/archdemon.gif',
+    'https://www.margonem.pl/obrazki/npc/woj/titangoblin.gif',
+    'https://www.margonem.pl/obrazki/npc/woj/titanhuntress.gif',
+    'https://www.margonem.pl/obrazki/npc/woj/titansecta.gif',
+    'https://www.margonem.pl/obrazki/npc/pot/maddok-tytan.gif',
+    'https://www.margonem.pl/obrazki/npc/hum/tezcatlipoca.gif',
+    'https://www.margonem.pl/obrazki/npc/hum/ice_king.gif',
 ].map((url, index) => ({
     imageUrl: url,
+    type: ContentType.Enemy,
     id: index.toString(),
-    primaryDescription: produceCharacterName(url),
-    secondaryDescription: `level: ${((index * index) % 23) + 7}`,
+    name: produceCharacterName(url),
+    level: ((index * index) % 23) + 7,
+    description: 'lorem',
 }));

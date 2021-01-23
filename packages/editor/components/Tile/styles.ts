@@ -6,6 +6,13 @@ export const TileSprite = styled.img<{ size: number }>`
     bottom: 0;
 `;
 
+export const CharacterSprite = styled.img`
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+`;
+
 const BORDER_SIZE = 1;
 export const TileTooltip = styled.div`
     height: 100%;

@@ -1,23 +1,32 @@
 import React, { FunctionComponent } from 'react';
 import { loadImage } from '../../helpers/loadImage';
-import { EditMode, TileData } from '../../store/map/types';
-import { TileSprite, TileTooltip, TileWrapper } from './styles';
+import { ContentType, TileData } from '../../store/map/types';
+import { CharacterSprite, TileSprite, TileTooltip, TileWrapper } from './styles';
 
 export type TileProps = {
     tile: TileData;
     size: number;
-    mode: EditMode;
     onClick: (tile: TileData) => void;
+    showNpcs: boolean;
+    showEnemies: boolean;
+    showCollisions: boolean;
 };
 
-const Tile: FunctionComponent<TileProps> = ({ tile, size, onClick }) => {
+const Tile: FunctionComponent<TileProps> = ({ tile, size, onClick, showCollisions, showNpcs, showEnemies }) => {
     const onTileClick = () => {
         onClick(tile);
     };
 
+    const isTileHasCollision =
+        showCollisions && (tile.content?.type === ContentType.Enemy || tile.content?.type === ContentType.Npc); // or enemy or npc
+    const isTileHaveEnemy = showEnemies && tile.content?.type === ContentType.Enemy;
+    const isTileHaveNpc = showNpcs && tile.content?.type === ContentType.Npc;
+
     return (
         <TileWrapper onClick={onTileClick}>
-            {tile.collision ? <TileSprite src={loadImage('wall', 'svg')} alt="wall" size={size} /> : null}
+            {isTileHaveEnemy && <CharacterSprite src={tile.content?.imageUrl} />}
+            {isTileHaveNpc && <div>npc</div>}
+            {isTileHasCollision && <TileSprite src={loadImage('wall', 'svg')} alt="wall" size={size} />}
             <TileTooltip />
         </TileWrapper>
     );

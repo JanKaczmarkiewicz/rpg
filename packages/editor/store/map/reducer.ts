@@ -2,7 +2,7 @@ import produce from 'immer';
 import { loadImage } from '../../helpers/loadImage';
 import { setEditorModeMutation, SET_EDITOR_MODE } from './actions/setEditorMode';
 import { setEditorSelectedEnemyMutation, SET_EDITOR_SELECTED_ENEMY } from './actions/setEditorSelectedEnemy';
-import { setTileCollisionMutation, SET_TILE_COLLISION } from './actions/setTileCollision';
+import { setTileContentMutation, SET_TILE_CONTENT } from './actions/setTileContent';
 import { Reducer, State } from './types';
 
 export const config: State = {
@@ -18,7 +18,7 @@ export const config: State = {
                         id: `${i}-${j}`,
                         x: j,
                         y: i,
-                        collision: false,
+                        content: null,
                     })),
             ),
     },
@@ -31,7 +31,7 @@ export const config: State = {
 };
 
 const MUTATIONS_MAP = {
-    [SET_TILE_COLLISION]: setTileCollisionMutation,
+    [SET_TILE_CONTENT]: setTileContentMutation,
     [SET_EDITOR_MODE]: setEditorModeMutation,
     [SET_EDITOR_SELECTED_ENEMY]: setEditorSelectedEnemyMutation,
 };

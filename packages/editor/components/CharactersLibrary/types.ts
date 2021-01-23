@@ -1,18 +1,19 @@
-export type CharacterLibraryProps = {
-    characters: CharacterDefinition[];
+export type CharacterLibraryProps<T> = {
+    characters: T[];
     selectedCharacterId?: string;
-    onSelect: (characterDefinition: CharacterDefinition) => void;
+    onSelect: (character: T) => void;
+    getCharacterCardDetails: (character: T) => CharacterCardDetails;
 };
 
-export type CharacterDefinition = {
-    imageUrl: string;
+export type CharacterCardDetails = {
     id: string;
+    imageUrl: string;
     primaryDescription: string;
     secondaryDescription: string;
 };
 
-export type CharacterCardProps = {
-    characterDefinition: CharacterDefinition;
+export type CharacterCardProps<T> = {
+    characterDetails: T;
     selected?: boolean;
-    onClick: (characterDefinition: CharacterDefinition) => void;
+    onClick: (characterDetails: T) => void;
 };

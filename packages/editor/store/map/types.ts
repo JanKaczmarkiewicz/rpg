@@ -1,30 +1,59 @@
-import { CharacterDefinition } from '../../components/CharactersLibrary/types';
-import { setTileCollision } from './actions/setTileCollision';
+import { setTileContent } from './actions/setTileContent';
 
 export enum EditMode {
-    Collision = 'Collision',
+    Wall = 'Wall',
     Npc = 'Npc',
     Enemy = 'Enemy',
 }
+
+export enum ContentType {
+    Enemy = 'Enemy',
+    Npc = 'Npc',
+    Wall = 'Wall',
+}
+
+interface TileContent {
+    type: ContentType;
+}
+
+export interface Character extends TileContent {
+    id: string;
+    name: string;
+    imageUrl: string;
+}
+
+export interface Enemy extends Character {
+    type: ContentType.Enemy;
+    level: number;
+    description: string;
+}
+
+interface Wall extends TileContent {}
+
+export interface Npc extends Character {
+    type: ContentType.Npc;
+    level: number;
+    description: string;
+}
+
 export type TileData = {
     id: string;
     x: number;
     y: number;
-    collision: boolean;
+    content: Npc | Enemy | Wall | null;
 };
-export type EditorData =
-    | { mode: null }
-    | { mode: EditMode.Collision }
-    | { mode: EditMode.Npc }
-    | { mode: EditMode.Enemy; selectedEnemy: null | string };
 export type State = {
-    map: { tiles: TileData[][]; backgroundImageUrl: string; tileSize: number };
+    map: {
+        tiles: TileData[][];
+        backgroundImageUrl: string;
+        tileSize: number;
+    };
     editor: {
         mode: EditMode | null;
         collisionData: {};
-        npcData: { selected: CharacterDefinition | null };
-        enemyData: { selected: CharacterDefinition | null };
+        npcData: { selected: Npc | null };
+        enemyData: { selected: Enemy | null };
     };
 };
-export type Action = ReturnType<typeof setTileCollision>;
+export type Action = ReturnType<typeof setTileContent>;
 export type Reducer = (state: State | undefined, action: Action) => State;

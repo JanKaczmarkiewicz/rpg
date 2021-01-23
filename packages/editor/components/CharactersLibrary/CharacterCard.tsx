@@ -1,12 +1,15 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core';
-import { FunctionComponent } from 'react';
-import { CharacterCardProps } from './types';
+import { CharacterCardDetails, CharacterCardProps } from './types';
 
-const CharacterCard: FunctionComponent<CharacterCardProps> = ({ onClick, characterDefinition, selected = false }) => {
-    const { imageUrl, primaryDescription, secondaryDescription } = characterDefinition;
+const CharacterCard = <T extends CharacterCardDetails>({
+    onClick,
+    characterDetails,
+    selected = false,
+}: CharacterCardProps<T>) => {
+    const { imageUrl, primaryDescription, secondaryDescription } = characterDetails;
 
     const onActionAreaClick = (): void => {
-        onClick(characterDefinition);
+        onClick(characterDetails);
     };
 
     return (
