@@ -6,4 +6,5 @@ export const selectMapHorizontalSize = (state: State): number => state.map.tiles
 export const selectTiles = (state: State): State['map']['tiles'] => state.map.tiles;
 export const selectMapBackground = (state: State): string => state.map.backgroundImageUrl;
 
-export const selectEditorData = (state: State) => state.editor;
+export const selectEditorMode = (state: State) => state.editor.mode;
+export const selectEditorEnemyData = (state: State) => state.editor.enemyData;

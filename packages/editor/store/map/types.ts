@@ -1,3 +1,4 @@
+import { CharacterDefinition } from '../../components/CharactersLibrary/types';
 import { setTileCollision } from './actions/setTileCollision';
 
 export enum EditMode {
@@ -18,7 +19,12 @@ export type EditorData =
     | { mode: EditMode.Enemy; selectedEnemy: null | string };
 export type State = {
     map: { tiles: TileData[][]; backgroundImageUrl: string; tileSize: number };
-    editor: { mode: EditMode | null };
+    editor: {
+        mode: EditMode | null;
+        collisionData: {};
+        npcData: { selected: CharacterDefinition | null };
+        enemyData: { selected: CharacterDefinition | null };
+    };
 };
 export type Action = ReturnType<typeof setTileCollision>;
-export type Reducer = (state: State, action: Action) => State;
+export type Reducer = (state: State | undefined, action: Action) => State;

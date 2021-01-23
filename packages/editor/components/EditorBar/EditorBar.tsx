@@ -9,10 +9,10 @@ import NpcsEditor from './blades/NpcsEditor/NpcsEditor';
 import EnemiesEditor from './blades/EnemiesEditor/EnemiesEditor';
 import CollisionsEditor from './blades/CollisionsEditor/CollisionsEditor';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectEditorData } from '../../store/map/selectors';
+import { selectEditorMode } from '../../store/map/selectors';
 import { setEditorMode } from '../../store/map/actions/setEditorMode';
 
-const BLADES = {
+const BLADES: { [key in EditMode]: React.FunctionComponent<{}> } = {
     [EditMode.Collision]: CollisionsEditor,
     [EditMode.Npc]: NpcsEditor,
     [EditMode.Enemy]: EnemiesEditor,
@@ -22,7 +22,7 @@ const EditorBar: FunctionComponent = () => {
     const localize = useLocalize();
     const dispatch = useDispatch();
 
-    const { mode, ...editorProps } = useSelector(selectEditorData);
+    const editorMode = useSelector(selectEditorMode);
 
     const onBackClick = (): void => {
         dispatch(setEditorMode({ mode: null }));
@@ -33,11 +33,12 @@ const EditorBar: FunctionComponent = () => {
     };
 
     const getBlade = (): React.ReactNode => {
-        if (!mode) return <MainMenuBlade onMenuItemClick={onMenuItemClick} />;
+        if (!editorMode) return <MainMenuBlade onMenuItemClick={onMenuItemClick} />;
+
         return (
             <>
                 <Button onClick={onBackClick}>{localize('back')}</Button>
-                {createElement(BLADES[mode], editorProps)}
+                {createElement(BLADES[editorMode])}
             </>
         );
     };

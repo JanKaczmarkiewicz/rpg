@@ -1,6 +1,7 @@
 import produce from 'immer';
 import { loadImage } from '../../helpers/loadImage';
 import { setEditorModeMutation, SET_EDITOR_MODE } from './actions/setEditorMode';
+import { setEditorSelectedEnemyMutation, SET_EDITOR_SELECTED_ENEMY } from './actions/setEditorSelectedEnemy';
 import { setTileCollisionMutation, SET_TILE_COLLISION } from './actions/setTileCollision';
 import { Reducer, State } from './types';
 
@@ -23,15 +24,19 @@ export const config: State = {
     },
     editor: {
         mode: null,
+        collisionData: {},
+        enemyData: { selected: null },
+        npcData: { selected: null },
     },
 };
 
 const MUTATIONS_MAP = {
     [SET_TILE_COLLISION]: setTileCollisionMutation,
     [SET_EDITOR_MODE]: setEditorModeMutation,
+    [SET_EDITOR_SELECTED_ENEMY]: setEditorSelectedEnemyMutation,
 };
 
-const reducer: Reducer = (state: State = config, action) => {
+const reducer: Reducer = (state = config, action) => {
     const mutation = MUTATIONS_MAP[action.type];
 
     if (!mutation) return state;
