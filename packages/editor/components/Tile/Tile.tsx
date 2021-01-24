@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { loadImage } from '../../helpers/loadImage';
-import { ContentType, TileData } from '../../store/map/types';
+import { ContentType, Enemy, Npc, TileData, Wall } from '../../store/map/types';
 import { CharacterSprite, TileSprite, TileTooltip, TileWrapper } from './styles';
 
 export type TileProps = {
@@ -12,20 +12,21 @@ export type TileProps = {
     showCollisions: boolean;
 };
 
+const isEnemy = (content: TileData['content']): content is Enemy => content?.type === ContentType.Enemy;
+const isNpc = (content: TileData['content']): content is Npc => content?.type === ContentType.Npc;
+const isWall = (content: TileData['content']): content is Wall => content?.type === ContentType.Wall;
+
 const Tile: FunctionComponent<TileProps> = ({ tile, size, onClick, showCollisions, showNpcs, showEnemies }) => {
     const onTileClick = () => {
         onClick(tile);
     };
 
-    const isTileHasCollision =
-        showCollisions && (tile.content?.type === ContentType.Enemy || tile.content?.type === ContentType.Npc); // or enemy or npc
-    const isTileHaveEnemy = showEnemies && tile.content?.type === ContentType.Enemy;
-    const isTileHaveNpc = showNpcs && tile.content?.type === ContentType.Npc;
+    const isTileHasCollision = showCollisions && (isEnemy(tile.content) || isNpc(tile.content) || isWall(tile.content));
 
     return (
         <TileWrapper onClick={onTileClick}>
-            {isTileHaveEnemy && <CharacterSprite src={tile.content?.imageUrl} />}
-            {isTileHaveNpc && <div>npc</div>}
+            {showEnemies && isEnemy(tile.content) && <CharacterSprite src={tile.content.imageUrl} />}
+            {showNpcs && isNpc(tile.content) && <div>npc</div>}
             {isTileHasCollision && <TileSprite src={loadImage('wall', 'svg')} alt="wall" size={size} />}
             <TileTooltip />
         </TileWrapper>

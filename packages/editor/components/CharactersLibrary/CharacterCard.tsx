@@ -1,4 +1,5 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core';
+import React from 'react';
+import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { CharacterCardDetails, CharacterCardProps } from './types';
 
 const CharacterCard = <T extends CharacterCardDetails>({
@@ -15,7 +16,9 @@ const CharacterCard = <T extends CharacterCardDetails>({
     return (
         <Card variant={selected ? 'outlined' : 'elevation'}>
             <CardActionArea onClick={onActionAreaClick}>
-                <CardMedia component="img" src={imageUrl} />
+                <Box p={2}>
+                    <CardMedia component="img" src={imageUrl} />
+                </Box>
 
                 <CardContent>
                     <Typography gutterBottom variant="h5">

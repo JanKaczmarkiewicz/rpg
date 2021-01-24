@@ -17,7 +17,6 @@ const useTileCommonProps = (): Pick<TileProps, 'onClick' | 'showCollisions' | 's
     const dispatch = useDispatch();
     const editorMode = useSelector(selectEditorMode);
     const enemyData = useSelector(selectEditorEnemyData);
-    console.log(enemyData, editorMode);
 
     if (editorMode === EditMode.Wall) {
         return {

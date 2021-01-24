@@ -28,7 +28,9 @@ export interface Enemy extends Character {
     description: string;
 }
 
-interface Wall extends TileContent {}
+export interface Wall extends TileContent {
+    type: ContentType.Wall;
+}
 
 export interface Npc extends Character {
     type: ContentType.Npc;

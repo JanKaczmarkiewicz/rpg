@@ -22,7 +22,6 @@ const EnemiesEditor: FunctionComponent = () => {
     const editorEnemyData = useSelector(selectEditorEnemyData);
 
     const onSelectCharacter = (enemy: Enemy) => {
-        console.log(enemy);
         dispatch(setEditorSelectedEnemy({ enemy }));
     };
 

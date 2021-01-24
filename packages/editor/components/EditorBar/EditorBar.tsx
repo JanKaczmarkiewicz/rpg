@@ -13,7 +13,7 @@ import { selectEditorMode } from '../../store/map/selectors';
 import { setEditorMode } from '../../store/map/actions/setEditorMode';
 
 const BLADES: { [key in EditMode]: React.FunctionComponent<{}> } = {
-    [EditMode.Collision]: CollisionsEditor,
+    [EditMode.Wall]: CollisionsEditor,
     [EditMode.Npc]: NpcsEditor,
     [EditMode.Enemy]: EnemiesEditor,
 };
