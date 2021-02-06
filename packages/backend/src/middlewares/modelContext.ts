@@ -1,9 +1,12 @@
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
+import Map from '../models/Map/Map';
 
-const modelContextMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const modelContextMiddleware: RequestHandler = (req, res, next) => {
     req.context = {
         ...req.context,
-        models: {},
+        models: {
+            Map,
+        },
     };
     next();
 };
