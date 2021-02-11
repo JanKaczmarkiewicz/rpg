@@ -8,7 +8,7 @@ export type Content = {
     kind: ContentKind;
 };
 
-interface MapDbObject extends Document {
+export interface MapDbObject extends Document {
     backgroundUrl: string;
     tiles: Content[][];
 }
