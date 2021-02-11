@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
 import Header from '../components/AppHeader/AppHeader';
 import { Container, List, ListItem, ListItemText } from '@material-ui/core';
@@ -22,9 +23,14 @@ const Maps: FunctionComponent<MapsProps> = ({ maps }) => {
                 <Container maxWidth="sm">
                     <List>
                         {maps.map(({ id, name, tiles }) => (
-                            <ListItem button key={id}>
-                                <ListItemText primary={name} secondary={`${tiles.length} x ${tiles[0]?.length ?? 0}`} />
-                            </ListItem>
+                            <Link href={`/map/${id}`}>
+                                <ListItem button key={id}>
+                                    <ListItemText
+                                        primary={name}
+                                        secondary={`${tiles.length} x ${tiles[0]?.length ?? 0}`}
+                                    />
+                                </ListItem>
+                            </Link>
                         ))}
                     </List>
                 </Container>
