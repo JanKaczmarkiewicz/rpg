@@ -4,7 +4,7 @@ import { ContentKind, CONTENT_DISCRIMINATION_KEY, Model } from '../../constants/
 
 const contentSchema = new Schema({}, { discriminatorKey: CONTENT_DISCRIMINATION_KEY, _id: false });
 
-type Content = {
+export type Content = {
     kind: ContentKind;
 };
 
