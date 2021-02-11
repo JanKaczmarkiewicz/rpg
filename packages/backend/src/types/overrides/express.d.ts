@@ -1,4 +1,4 @@
-import Map from '../models/Map/Map';
+import Map from '../../models/Map/Map';
 
 export type Context = {
     models: { Map: typeof Map };

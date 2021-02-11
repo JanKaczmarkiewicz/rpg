@@ -16,7 +16,7 @@ const validate = (
     } catch (err: unknown) {
         if (err instanceof yup.ValidationError) return res.status(ResponseStatus.BadRequest).json(formatErrors(err));
 
-        res.status(ResponseStatus.BadRequest);
+        return res.status(ResponseStatus.BadRequest);
     }
 };
 

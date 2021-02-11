@@ -40,8 +40,6 @@ export interface Npc extends Character {
 
 export type TileData = {
     id: string;
-    x: number;
-    y: number;
     content: Npc | Enemy | Wall | null;
 };
 export type State = {

@@ -1,9 +1,12 @@
 import express from 'express';
-import modelContextMiddleware from '../middlewares/modelContext';
-import mapsRouter from '../routes/maps';
+import bodyParser from 'body-parser';
+
 import connectToDatabase from './connectToDatabase';
 import logger from './logger';
-import bodyParser from 'body-parser';
+import './setupYup';
+
+import modelContextMiddleware from '../middlewares/modelContext';
+import mapsRouter from '../routes/maps';
 
 async function server() {
     const app = express();
