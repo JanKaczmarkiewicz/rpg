@@ -6,7 +6,11 @@
         "noEmit": true,
         "esModuleInterop": true,
         "moduleResolution": "node",
-        "jsx": "preserve"
+        "jsx": "preserve",
+        "allowJs": true,
+        "skipLibCheck": true,
+        "module": "esnext",
+        "isolatedModules": true
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
     "exclude": ["node_modules"]
