@@ -1,12 +1,14 @@
 import { Router } from 'express';
-import { ResponseStatus } from '../constants/constants';
-import { MapDbObject } from '../models/Map/Map';
+import { ResponseStatus } from '../../constants/constants';
+import { MapDbObject } from '../../models/Map/Map';
+import { MapObjectResponse } from './types';
 import { validateMapsPostBody } from './validators';
 
 const mapsRouter = Router();
 
-const sanitizeMap = (doc: MapDbObject) => ({
+const sanitizeMap = (doc: MapDbObject): MapObjectResponse => ({
     id: doc.id,
+    name: doc.name,
     backgroundUrl: doc.backgroundUrl,
     tiles: doc.tiles,
 });

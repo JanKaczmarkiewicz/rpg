@@ -11,10 +11,15 @@ export type Content = {
 export interface MapDbObject extends Document {
     backgroundUrl: string;
     tiles: Content[][];
+    name: string;
 }
 
 const mapSchema = new Schema<MapDbObject>({
     backgroundUrl: {
+        type: String,
+        required: true,
+    },
+    name: {
         type: String,
         required: true,
     },

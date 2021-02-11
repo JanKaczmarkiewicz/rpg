@@ -1,12 +1,13 @@
 import { object, string, array, lazy } from 'yup';
-import { ContentKind } from '../constants/constants';
-import validate from '../middlewares/validate';
-import { Content } from '../models/Map/Map';
+import { ContentKind } from '../../constants/constants';
+import validate from '../../middlewares/validate';
+import { Content } from '../../models/Map/Map';
 
 export const validateMapsPostBody = validate(
     'body',
     object({
         backgroundUrl: string().required(),
+        name: string().required(),
         tiles: array()
             .of(
                 array().of(

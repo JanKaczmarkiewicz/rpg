@@ -1,29 +1,46 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
-import { Box, Toolbar } from '@material-ui/core';
-
-import EditedMap from '../components/EditedMap/EditedMap';
 import Header from '../components/AppHeader/AppHeader';
-import LeftMenu from '../components/LeftMenu/LeftMenu';
+import { Container, List, ListItem, ListItemText } from '@material-ui/core';
+import { HttpMethod } from '@rpg/backend/src/constants/constants';
+import { MapObjectResponse } from '@rpg/backend/src/routes/maps/types';
+import { client } from '../apiClient/client';
+import { GetStaticProps } from 'next';
 
-function Home() {
+type MapsProps = {
+    maps: MapObjectResponse[];
+};
+
+const Maps: FunctionComponent<MapsProps> = ({ maps }) => {
     return (
         <div>
             <Head>
-                <title>RPG editor</title>
+                <title>Maps</title>
             </Head>
             <Header />
-            <LeftMenu />
             <main>
-                <Toolbar />
-                <EditedMap />
+                <Container maxWidth="sm">
+                    <List>
+                        {maps.map(({ id, name, tiles }) => (
+                            <ListItem button key={id}>
+                                <ListItemText primary={name} secondary={`${tiles.length} x ${tiles[0]?.length ?? 0}`} />
+                            </ListItem>
+                        ))}
+                    </List>
+                </Container>
             </main>
         </div>
     );
-}
+};
 
-// TODO: disabling ssr for now because it causes mismatch in css classes. See: https://material-ui.com/guides/server-rendering/
-export default dynamic(() => Promise.resolve(Home), {
-    ssr: false,
-});
+export const getStaticProps: GetStaticProps<MapsProps> = async () => {
+    const res = await client<MapObjectResponse[]>({ url: '/maps', method: HttpMethod.Get });
+
+    return {
+        props: {
+            maps: res,
+        },
+    };
+};
+
+export default Maps;

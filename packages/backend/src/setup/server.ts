@@ -1,12 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 import connectToDatabase from './connectToDatabase';
 import logger from './logger';
 import './setupYup';
 
 import modelContextMiddleware from '../middlewares/modelContext';
-import mapsRouter from '../routes/maps';
+import mapsRouter from '../routes/maps/router';
 
 async function server() {
     const app = express();
@@ -15,6 +16,7 @@ async function server() {
     logger.info(`Successful connection to database.`);
 
     app.use(bodyParser.json());
+    app.use(cors());
     app.use(modelContextMiddleware);
     app.use('/api/maps', mapsRouter);
 

@@ -18,3 +18,8 @@ export enum ResponseStatus {
     BadRequest = 400,
     Created = 201,
 }
+
+export enum HttpMethod {
+    Get = 'GET',
+    Post = 'POST',
+}
