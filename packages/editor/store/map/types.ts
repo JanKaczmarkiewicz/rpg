@@ -1,3 +1,4 @@
+import { MapObjectResponse } from '@rpg/backend/src/routes/maps/types';
 import { setTileContent } from './actions/setTileContent';
 
 export enum EditMode {
@@ -13,7 +14,7 @@ export enum ContentType {
 }
 
 interface TileContent {
-    type: ContentType;
+    kind: ContentType;
 }
 
 export interface Character extends TileContent {
@@ -23,13 +24,13 @@ export interface Character extends TileContent {
 }
 
 export interface Enemy extends Character {
-    type: ContentType.Enemy;
+    kind: ContentType.Enemy;
     level: number;
     description: string;
 }
 
 export interface Wall extends TileContent {
-    type: ContentType.Wall;
+    kind: ContentType.Wall;
 }
 
 export interface Npc extends Character {
@@ -38,16 +39,8 @@ export interface Npc extends Character {
     description: string;
 }
 
-export type TileData = {
-    id: string;
-    content: Npc | Enemy | Wall | null;
-};
 export type State = {
-    map: {
-        tiles: TileData[][];
-        backgroundImageUrl: string;
-        tileSize: number;
-    };
+    map: MapObjectResponse & { tileSize: number };
     editor: {
         mode: EditMode | null;
         collisionData: {};
@@ -56,4 +49,4 @@ export type State = {
     };
 };
 export type Action = ReturnType<typeof setTileContent>;
-export type Reducer = (state: State | undefined, action: Action) => State;
+export type Reducer = (state: State, action: Action) => State;

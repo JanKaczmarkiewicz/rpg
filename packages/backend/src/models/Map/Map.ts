@@ -5,7 +5,7 @@ import { ContentKind, CONTENT_DISCRIMINATION_KEY, Model } from '../../constants/
 const contentSchema = new Schema({}, { discriminatorKey: CONTENT_DISCRIMINATION_KEY, _id: false });
 
 export type Content = {
-    kind: ContentKind;
+    kind: ContentKind | null;
 };
 
 export interface MapDbObject extends Document {
