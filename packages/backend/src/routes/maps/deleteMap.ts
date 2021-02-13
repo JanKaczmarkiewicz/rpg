@@ -1,6 +1,6 @@
 import { ResponseStatus } from '../../constants/constants';
 import { object, string } from 'yup';
-import validate from '../../middlewares/validate';
+import validate from '../../middleware/validate';
 import { Response, Request } from 'express';
 
 type DeleteMapParams = { id: string };

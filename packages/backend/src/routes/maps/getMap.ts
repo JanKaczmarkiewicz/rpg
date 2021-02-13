@@ -1,5 +1,5 @@
 import { object, string } from 'yup';
-import validate from '../../middlewares/validate';
+import validate from '../../middleware/validate';
 import { ResponseStatus } from '../../constants/constants';
 import { sanitizeMap } from './shered/sanitize';
 import { Request, Response } from 'express';

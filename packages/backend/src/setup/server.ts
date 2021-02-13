@@ -6,7 +6,7 @@ import connectToDatabase from './connectToDatabase';
 import logger from './logger';
 import './setupYup';
 
-import modelContextMiddleware from '../middlewares/modelContext';
+import modelContextMiddleware from '../middleware/modelContext';
 import mapsRouter from '../routes/maps';
 
 async function server() {

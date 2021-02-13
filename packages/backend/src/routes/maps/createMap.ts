@@ -1,6 +1,6 @@
 import { string, object, array, lazy } from 'yup';
 import { ContentKind, ResponseStatus } from '../../constants/constants';
-import validate from '../../middlewares/validate';
+import validate from '../../middleware/validate';
 import { Content } from '../../models/Map/Map';
 import { sanitizeMap } from './shered/sanitize';
 import { Request, Response } from 'express';
