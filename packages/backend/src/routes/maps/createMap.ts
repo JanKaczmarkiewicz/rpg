@@ -1,9 +1,11 @@
-import { object, string, array, lazy } from 'yup';
-import { ContentKind } from '../../constants/constants';
+import { string, object, array, lazy } from 'yup';
+import { ContentKind, ResponseStatus } from '../../constants/constants';
 import validate from '../../middlewares/validate';
 import { Content } from '../../models/Map/Map';
+import { sanitizeMap } from './shered/sanitize';
+import { Request, Response } from 'express';
 
-export const validateMapsPostBody = validate(
+export const validateCreateMapBody = validate(
     'body',
     object({
         backgroundUrl: string().required(),
@@ -35,3 +37,18 @@ export const validateMapsPostBody = validate(
             .required(),
     }),
 );
+
+const createMap = async (req: Request<{}>, res: Response) => {
+    const { Map } = req.context.models;
+    const newMap = req.body;
+
+    try {
+        const doc = await new Map(newMap).save();
+
+        return res.status(ResponseStatus.Created).json(sanitizeMap(doc));
+    } catch (error) {
+        return res.status(ResponseStatus.BadRequest).json({ message: 'bad request' });
+    }
+};
+
+export default createMap;

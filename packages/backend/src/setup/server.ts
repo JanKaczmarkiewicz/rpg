@@ -7,7 +7,7 @@ import logger from './logger';
 import './setupYup';
 
 import modelContextMiddleware from '../middlewares/modelContext';
-import mapsRouter from '../routes/maps/router';
+import mapsRouter from '../routes/maps';
 
 async function server() {
     const app = express();
