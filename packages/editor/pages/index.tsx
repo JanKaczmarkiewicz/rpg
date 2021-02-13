@@ -23,7 +23,7 @@ const Maps: FunctionComponent<MapsProps> = ({ maps }) => {
                 <Container maxWidth="sm">
                     <List>
                         {maps.map(({ id, name, tiles }) => (
-                            <Link href={`/maps/${id}`}>
+                            <Link href={`/maps/${id}`} key={id}>
                                 <ListItem button key={id}>
                                     <ListItemText
                                         primary={name}
