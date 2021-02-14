@@ -4,9 +4,10 @@ import Head from 'next/head';
 import Header from '../components/AppHeader/AppHeader';
 import { Container, List, ListItem, ListItemText } from '@material-ui/core';
 import { HttpMethod } from '@rpg/backend/src/constants/constants';
-import { MapObjectResponse } from '@rpg/backend/src/routes/maps/types';
 import { client } from '../apiClient/client';
 import { GetStaticProps } from 'next';
+import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shered/types';
+import AddMapButton from '../components/AddMapButton/AddMapButton';
 
 type MapsProps = {
     maps: MapObjectResponse[];
@@ -21,6 +22,7 @@ const Maps: FunctionComponent<MapsProps> = ({ maps }) => {
             <Header />
             <main>
                 <Container maxWidth="sm">
+                    <AddMapButton />
                     <List>
                         {maps.map(({ id, name, tiles }) => (
                             <Link href={`/maps/${id}`} key={id}>

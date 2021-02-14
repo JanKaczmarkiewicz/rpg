@@ -10,6 +10,7 @@ export enum ContentKind {
     Enemy = 'Enemy',
     Npc = 'Npc',
     Wall = 'Wall',
+    Empty = 'Empty',
 }
 
 export enum ResponseStatus {

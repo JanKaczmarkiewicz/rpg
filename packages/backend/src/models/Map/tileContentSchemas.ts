@@ -11,6 +11,7 @@ const tileContentSchemas = {
         { _id: false },
     ),
     [ContentKind.Wall]: new Schema({}, { _id: false }),
+    [ContentKind.Empty]: new Schema({}, { _id: false }),
 };
 
 export default tileContentSchemas;

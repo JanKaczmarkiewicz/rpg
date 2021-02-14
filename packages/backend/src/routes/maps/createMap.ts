@@ -25,6 +25,8 @@ export const validateCreateMapBody = validate(
                                 });
                             case ContentKind.Wall:
                                 return object({});
+                            case ContentKind.Empty:
+                                return object({});
                             default:
                                 return object({ kind: string().oneOf(Object.keys(ContentKind)).required() });
                         }

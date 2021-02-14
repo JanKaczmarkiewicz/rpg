@@ -1,10 +1,12 @@
-export type RequestOptions = { url: string } & RequestInit;
+export type RequestOptions = Omit<RequestInit, 'body'> & { url: string; body?: Record<string, any> };
 
-export const client = <T>({ url, body, ...options }: RequestOptions): Promise<T> =>
-    fetch(`http://localhost:3001/api${url}`, {
+export const client = async <T>({ url, body, ...options }: RequestOptions): Promise<T> => {
+    const res = await fetch(`http://localhost:3001/api${url}`, {
         ...options,
         headers: {
             'Content-Type': 'application/json',
         },
         body: body ? JSON.stringify(body) : undefined,
-    }).then((res) => res.json());
+    });
+    return res.json();
+};

@@ -2,8 +2,13 @@ import { RequestHandler, Request } from 'express';
 import * as yup from 'yup';
 import { ResponseStatus } from '../constants/constants';
 
-const formatErrors = (err: yup.ValidationError) => ({
-    error: err.inner.map(({ path, errors }) => ({ path, info: errors })),
+type RequestError = { path: string; messages: string[] };
+
+export const formatValidationError = (err: yup.ValidationError): RequestError[] =>
+    err.inner.map(({ path, errors }) => ({ path: path || 'undefined', messages: errors }));
+
+export const errors = (errors: RequestError[]) => ({
+    errors,
 });
 
 const validate = (
@@ -14,7 +19,8 @@ const validate = (
         await schema.validate(req[path], { abortEarly: false });
         next();
     } catch (err: unknown) {
-        if (err instanceof yup.ValidationError) return res.status(ResponseStatus.BadRequest).json(formatErrors(err));
+        if (err instanceof yup.ValidationError)
+            return res.status(ResponseStatus.BadRequest).json(errors(formatValidationError(err)));
 
         return res.status(ResponseStatus.BadRequest);
     }
