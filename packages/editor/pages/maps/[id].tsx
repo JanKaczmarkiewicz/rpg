@@ -5,8 +5,6 @@ import { Toolbar } from '@material-ui/core';
 import EditedMap from '../../components/EditedMap/EditedMap';
 import Header from '../../components/AppHeader/AppHeader';
 import LeftMenu from '../../components/LeftMenu/LeftMenu';
-import theme from '../../theme/emotionTheme';
-import { ThemeProvider } from '@emotion/react';
 import { Provider } from 'react-redux';
 import { GetServerSideProps } from 'next';
 import { HttpMethod } from '@rpg/backend/src/constants/constants';
@@ -29,17 +27,15 @@ const MapRoute: FunctionComponent<MapProps> = ({ map }) => {
 
     return (
         <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <Head>
-                    <title>RPG editor</title>
-                </Head>
-                <Header />
-                <LeftMenu />
-                <main>
-                    <Toolbar />
-                    <EditedMap />
-                </main>
-            </ThemeProvider>
+            <Head>
+                <title>RPG editor</title>
+            </Head>
+            <Header />
+            <LeftMenu />
+            <main>
+                <Toolbar />
+                <EditedMap />
+            </main>
         </Provider>
     );
 };
