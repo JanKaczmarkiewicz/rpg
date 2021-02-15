@@ -40,7 +40,7 @@ export const validateCreateMapBody = validate(
     }),
 );
 
-const createMap = async (req: Request<{}>, res: Response) => {
+const createMap = async (req: Request, res: Response) => {
     const { Map } = req.context.models;
     const newMap = req.body;
 
@@ -49,7 +49,8 @@ const createMap = async (req: Request<{}>, res: Response) => {
 
         return res.status(ResponseStatus.Created).json(sanitizeMap(doc));
     } catch (error) {
-        return res.status(ResponseStatus.BadRequest).json({ message: 'bad request' });
+        // TODO: send error message
+        return res.status(ResponseStatus.BadRequest).json();
     }
 };
 

@@ -18,9 +18,9 @@ const deleteMap = async (req: Request<DeleteMapParams>, res: Response) => {
 
     const map = await Map.findByIdAndDelete(id);
 
-    if (!map) return res.status(ResponseStatus.NotFound).json({ message: 'not found' });
+    if (!map) return res.status(ResponseStatus.NotFound).json({ deleted: false });
 
-    res.status(ResponseStatus.Success).json({ ok: true });
+    res.status(ResponseStatus.Success).json({ deleted: true });
 };
 
 export default deleteMap;

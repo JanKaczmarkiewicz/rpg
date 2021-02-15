@@ -1,4 +1,5 @@
-import { MapObjectResponse } from '@rpg/backend/src/routes/maps/types';
+import { ContentKind } from '@rpg/backend/src/constants/constants';
+import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shered/types';
 import { setTileContent } from './actions/setTileContent';
 
 export enum EditMode {
@@ -7,37 +8,29 @@ export enum EditMode {
     Enemy = 'Enemy',
 }
 
-export enum ContentType {
-    Enemy = 'Enemy',
-    Npc = 'Npc',
-    Wall = 'Wall',
-}
-
 interface TileContent {
-    kind: ContentType;
+    kind: ContentKind;
 }
 
-export interface Character extends TileContent {
-    id: string;
-    name: string;
-    imageUrl: string;
-}
-
-export interface Enemy extends Character {
-    kind: ContentType.Enemy;
-    level: number;
-    description: string;
+export interface Enemy extends TileContent {
+    kind: ContentKind.Enemy;
+    enemy: {
+        id: string;
+        imageUrl: string;
+        level: number;
+        name: string;
+    };
 }
 
 export interface Wall extends TileContent {
-    kind: ContentType.Wall;
+    kind: ContentKind.Wall;
 }
 
-export interface Npc extends Character {
-    type: ContentType.Npc;
-    level: number;
-    description: string;
+export interface Npc extends TileContent {
+    kind: ContentKind.Npc;
 }
+
+export type TileData = MapObjectResponse['tiles'][number][number];
 
 export type State = {
     map: MapObjectResponse & { tileSize: number };

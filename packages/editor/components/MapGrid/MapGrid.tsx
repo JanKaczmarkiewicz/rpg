@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTileContent } from '../../store/map/actions/setTileContent';
+import { ContentKind } from '@rpg/backend/src/constants/constants';
+import { setTileContent, SetTileContentPayload } from '../../store/map/actions/setTileContent';
 import {
     selectEditorEnemyData,
     selectEditorMode,
@@ -9,49 +10,56 @@ import {
     selectTiles,
     selectTileSize,
 } from '../../store/map/selectors';
-import { EditMode, ContentType } from '../../store/map/types';
+import { EditMode } from '../../store/map/types';
 import Tile, { TileProps } from '../Tile/Tile';
 import { Grid } from './styles';
 
-const useTileCommonProps = (): Pick<TileProps, 'onClick' | 'showCollisions' | 'showNpcs' | 'showEnemies'> => {
+type GetTileProps = (cords: {
+    x: number;
+    y: number;
+}) => Pick<TileProps, 'showCollisions' | 'showNpcs' | 'showEnemies' | 'onClick'>;
+
+const useTileCommonProps = (): GetTileProps => {
     const dispatch = useDispatch();
     const editorMode = useSelector(selectEditorMode);
     const enemyData = useSelector(selectEditorEnemyData);
 
-    if (editorMode === EditMode.Wall) {
-        return {
-            onClick: ({ x, y }) => dispatch(setTileContent({ content: { type: ContentType.Wall }, x, y })),
-            showEnemies: true,
-            showNpcs: true,
-            showCollisions: true,
-        };
-    }
+    const updateTile = (payload: SetTileContentPayload) => dispatch(setTileContent(payload));
 
-    if (editorMode === EditMode.Enemy) {
-        return {
-            onClick: ({ x, y }) => dispatch(setTileContent({ content: enemyData.selected, x, y })),
-            showEnemies: true,
-            showNpcs: true,
-            showCollisions: false,
-        };
-    }
+    return ({ x, y }) => {
+        switch (editorMode) {
+            case EditMode.Wall:
+                return {
+                    onClick: () => updateTile({ content: { kind: ContentKind.Wall }, x, y }),
+                    showEnemies: true,
+                    showNpcs: true,
+                    showCollisions: true,
+                };
 
-    if (editorMode === EditMode.Npc) {
-        return {
-            onClick: ({ x, y }) => dispatch(setTileContent({ content: enemyData.selected, x, y })),
-            showEnemies: true,
-            showNpcs: true,
-            showCollisions: true,
-        };
-    }
+            case EditMode.Enemy:
+                return {
+                    onClick: () => updateTile({ content: { kind: ContentKind.Enemy }, x, y }),
+                    showEnemies: true,
+                    showNpcs: true,
+                    showCollisions: false,
+                };
 
-    return {
-        onClick: () => {
-            //nothing
-        },
-        showEnemies: true,
-        showNpcs: true,
-        showCollisions: true,
+            case EditMode.Npc:
+                return {
+                    onClick: () => updateTile({ content: { kind: ContentKind.Npc }, x, y }),
+                    showEnemies: true,
+                    showNpcs: true,
+                    showCollisions: true,
+                };
+
+            default:
+                return {
+                    onClick: () => updateTile({ content: { kind: ContentKind.Empty }, x, y }),
+                    showEnemies: true,
+                    showNpcs: true,
+                    showCollisions: true,
+                };
+        }
     };
 };
 
@@ -64,8 +72,10 @@ const MapGrid: FunctionComponent = () => {
 
     return (
         <Grid tileSize={tileSize} horizontalSize={mapHorizontalSize} verticalSize={mapVerticalSize}>
-            {tiles.flatMap((row) =>
-                row.map((tile) => <Tile {...commonTileProps} key={tile.id} tile={tile} size={tileSize} />),
+            {tiles.flatMap((row, i) =>
+                row.map((tile, j) => (
+                    <Tile {...commonTileProps({ x: i, y: j })} key={`${i}-${j}`} tile={tile} size={tileSize} />
+                )),
             )}
         </Grid>
     );

@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import { Toolbar } from '@material-ui/core';
 import EditedMap from '../../components/EditedMap/EditedMap';
 import Header from '../../components/AppHeader/AppHeader';
 import LeftMenu from '../../components/LeftMenu/LeftMenu';
@@ -33,7 +32,6 @@ const MapRoute: FunctionComponent<MapProps> = ({ map }) => {
             <Header />
             <LeftMenu />
             <main>
-                <Toolbar />
                 <EditedMap />
             </main>
         </Provider>
