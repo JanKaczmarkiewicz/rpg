@@ -1,13 +1,6 @@
 import { Model } from '../../constants/constants';
 import { Schema, model, Document } from 'mongoose';
 
-export interface EnemyObject {
-    name: string;
-    imageUrl: string;
-    level: number;
-    description: string;
-}
-
 export interface EnemyDbObject extends Document {
     name: string;
     imageUrl: string;

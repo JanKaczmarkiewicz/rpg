@@ -1,9 +1,11 @@
 import { string, object, array, lazy } from 'yup';
 import { ContentKind, ResponseStatus } from '../../constants/constants';
 import validate from '../../middleware/validate';
-import { Content } from '../../models/Map/Map';
+import { Content, MapDbObject } from '../../models/Map/Map';
 import { sanitizeMap } from './shered/sanitize';
 import { Request, Response } from 'express';
+
+export type CreateMapBody = Pick<MapDbObject, 'backgroundUrl' | 'name' | 'tiles'>;
 
 export const validateCreateMapBody = validate(
     'body',
@@ -40,7 +42,7 @@ export const validateCreateMapBody = validate(
     }),
 );
 
-const createMap = async (req: Request, res: Response) => {
+const createMap = async (req: Request<{}, {}, CreateMapBody>, res: Response) => {
     const { Map } = req.context.models;
     const newMap = req.body;
 

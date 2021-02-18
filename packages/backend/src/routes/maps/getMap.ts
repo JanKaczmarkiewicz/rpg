@@ -4,7 +4,7 @@ import { ResponseStatus } from '../../constants/constants';
 import { sanitizeMap } from './shered/sanitize';
 import { Request, Response } from 'express';
 
-type GetMapParams = { id: string };
+export type GetMapParams = { id: string };
 
 export const validateGetMapParams = validate(
     'params',

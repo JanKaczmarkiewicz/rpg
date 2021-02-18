@@ -3,7 +3,7 @@ import { object, string } from 'yup';
 import validate from '../../middleware/validate';
 import { Response, Request } from 'express';
 
-type DeleteMapParams = { id: string };
+export type DeleteMapParams = { id: string };
 
 export const validateDeleteMapParams = validate(
     'params',

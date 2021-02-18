@@ -1,6 +1,11 @@
-export type RequestOptions = Omit<RequestInit, 'body'> & { url: string; body?: Record<string, any> };
+import { HttpMethod } from '@rpg/backend/src/constants/constants';
+import { CreateMapBody } from '@rpg/backend/src/routes/maps/createMap';
+import { DeleteMapParams } from '@rpg/backend/src/routes/maps/deleteMap';
+import { GetMapParams } from '@rpg/backend/src/routes/maps/getMap';
 
-export const client = async <T>({ url, body, ...options }: RequestOptions): Promise<T> => {
+type RequestOptions = Omit<RequestInit, 'body'> & { url: string; body?: Record<string, any> };
+
+const request = async <T>({ url, body, ...options }: RequestOptions): Promise<T> => {
     const res = await fetch(`http://localhost:3001/api${url}`, {
         ...options,
         headers: {
@@ -10,3 +15,17 @@ export const client = async <T>({ url, body, ...options }: RequestOptions): Prom
     });
     return res.json();
 };
+
+class ApiClient {
+    baseUrl: string = 'http://localhost:3001/api';
+    mapRoute: string = `${this.baseUrl}/maps`;
+
+    map = () => ({
+        create: (payload: CreateMapBody) => request({ url: this.mapRoute, body: payload, method: HttpMethod.Post }),
+        getOne: ({ id }: GetMapParams) => request({ url: `${this.mapRoute}/${id}`, method: HttpMethod.Get }),
+        getMany: () => request({ url: this.mapRoute, method: HttpMethod.Get }),
+        deleteOne: ({ id }: DeleteMapParams) => request({ url: `${this.mapRoute}/${id}`, method: HttpMethod.Delete }),
+    });
+}
+
+export default new ApiClient();
