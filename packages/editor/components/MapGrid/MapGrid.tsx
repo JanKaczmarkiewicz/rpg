@@ -74,7 +74,7 @@ const MapGrid: FunctionComponent = () => {
         <Grid tileSize={tileSize} horizontalSize={mapHorizontalSize} verticalSize={mapVerticalSize}>
             {tiles.flatMap((row, i) =>
                 row.map((tile, j) => (
-                    <Tile {...commonTileProps({ x: i, y: j })} key={`${i}-${j}`} tile={tile} size={tileSize} />
+                    <Tile {...commonTileProps({ x: j, y: i })} key={`${i}-${j}`} tile={tile} size={tileSize} />
                 )),
             )}
         </Grid>

@@ -4,8 +4,11 @@ import validate from '../../middleware/validate';
 import { Content, MapDbObject } from '../../models/Map/Map';
 import { sanitizeMap } from './shered/sanitize';
 import { Request, Response } from 'express';
+import { MapObjectResponse } from './shered/types';
 
 export type CreateMapBody = Pick<MapDbObject, 'backgroundUrl' | 'name' | 'tiles'>;
+
+export type CreateMapResponse = MapObjectResponse;
 
 export const validateCreateMapBody = validate(
     'body',

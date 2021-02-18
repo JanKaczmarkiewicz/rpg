@@ -6,10 +6,9 @@ import Header from '../../components/AppHeader/AppHeader';
 import LeftMenu from '../../components/LeftMenu/LeftMenu';
 import { Provider } from 'react-redux';
 import { GetServerSideProps } from 'next';
-import { HttpMethod } from '@rpg/backend/src/constants/constants';
-import { client } from '../../apiClient/client';
 import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shered/types';
 import useStoreInitialize from '../../hooks/useStoreInitialize';
+import client from '../../apiClient/client';
 
 type MapProps = { map: MapObjectResponse };
 
@@ -38,8 +37,8 @@ const MapRoute: FunctionComponent<MapProps> = ({ map }) => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps<MapProps, { id: string }> = async ({ params: { id } = {} }) => {
-    const result = await client<MapObjectResponse>({ method: HttpMethod.Get, url: `/maps/${id}` });
+export const getServerSideProps: GetServerSideProps<MapProps, { id: string }> = async ({ params }) => {
+    const result = await client.map().getOne(params || { id: '' });
     return {
         props: { map: result },
     };

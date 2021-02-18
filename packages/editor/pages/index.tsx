@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
+import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
-import Header from '../components/AppHeader/AppHeader';
 import { Container, List, ListItem, ListItemText } from '@material-ui/core';
-import { HttpMethod } from '@rpg/backend/src/constants/constants';
-import { client } from '../apiClient/client';
-import { GetStaticProps } from 'next';
 import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shered/types';
+import Header from '../components/AppHeader/AppHeader';
 import AddMapButton from '../components/AddMapButton/AddMapButton';
+import client from '../apiClient/client';
 
 type MapsProps = {
     maps: MapObjectResponse[];
@@ -42,7 +41,7 @@ const Maps: FunctionComponent<MapsProps> = ({ maps }) => {
 };
 
 export const getStaticProps: GetStaticProps<MapsProps> = async () => {
-    const res = await client<MapObjectResponse[]>({ url: '/maps', method: HttpMethod.Get });
+    const res = await client.map().getMany();
 
     return {
         props: {

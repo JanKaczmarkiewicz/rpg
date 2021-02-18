@@ -3,8 +3,11 @@ import validate, { errors } from '../../middleware/validate';
 import { ResponseStatus } from '../../constants/constants';
 import { sanitizeMap } from './shered/sanitize';
 import { Request, Response } from 'express';
+import { MapObjectResponse } from './shered/types';
 
 export type GetMapParams = { id: string };
+
+export type GetMapResponse = MapObjectResponse;
 
 export const validateGetMapParams = validate(
     'params',

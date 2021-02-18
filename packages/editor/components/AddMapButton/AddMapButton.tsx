@@ -2,12 +2,10 @@ import React, { FunctionComponent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { Box, Button, TextField } from '@material-ui/core';
-import { HttpMethod } from '@rpg/backend/src/constants/constants';
-import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shered/types';
-import { client } from '../../apiClient/client';
 import { useLocalize } from '../../localization/useLocalize';
 import Modal from '../atom/Modal';
 import MapPreviewField from '../MapPreviewField/MapPreviewField';
+import client from '../../apiClient/client';
 
 const initialValues = {
     name: '',
@@ -22,7 +20,7 @@ const AddMapButton: FunctionComponent = () => {
     const { resetForm, submitForm, values, handleChange } = useFormik({
         initialValues,
         onSubmit: async (values) => {
-            const result = await client<MapObjectResponse>({ method: HttpMethod.Post, url: `/maps`, body: values });
+            const result = await client.map().create(values);
             router.push(`/maps/${result.id}`);
         },
     });
