@@ -1,7 +1,8 @@
-import { ResponseStatus } from '../../constants/constants';
+import { RequestHandler } from 'express';
 import { object, string } from 'yup';
+import { ResponseStatus } from '../../constants/constants';
 import validate from '../../middleware/validate';
-import { Response, Request, RequestHandler } from 'express';
+import { error } from '../../middleware/errorHandler';
 
 export type DeleteMapParams = { id: string };
 
@@ -12,15 +13,15 @@ export const validateDeleteMapParams = validate(
     }),
 );
 
-const deleteMap: RequestHandler<DeleteMapParams> = async (req, res) => {
+const deleteMap: RequestHandler<DeleteMapParams> = async (req, res, next) => {
     const { Map } = req.context.models;
     const { id } = req.params;
 
     const map = await Map.findByIdAndDelete(id);
 
-    if (!map) return res.status(ResponseStatus.NotFound).json({ deleted: false });
+    if (!map) return next(error.notFound({ id: ['Map not found.'] }));
 
-    res.status(ResponseStatus.Success).json({ deleted: true });
+    return res.status(ResponseStatus.Success).json({ deleted: true });
 };
 
 export default deleteMap;

@@ -1,9 +1,10 @@
+import { RequestHandler } from 'express';
 import { object, string } from 'yup';
-import validate, { errors } from '../../middleware/validate';
 import { ResponseStatus } from '../../constants/constants';
 import { sanitizeMap } from './shared/sanitize';
-import { Request, Response } from 'express';
 import { MapObjectResponse } from './shared/types';
+import validate from '../../middleware/validate';
+import { error } from '../../middleware/errorHandler';
 
 export type GetMapParams = { id: string };
 
@@ -16,15 +17,15 @@ export const validateGetMapParams = validate(
     }),
 );
 
-const getMap = async (req: Request<GetMapParams>, res: Response) => {
+const getMap: RequestHandler<GetMapParams> = async (req, res, next) => {
     const { Map } = req.context.models;
     const { id } = req.params;
 
     const map = await Map.findById(id);
 
-    if (!map) return res.status(ResponseStatus.NotFound).json(errors([{ path: 'id', messages: ['Not found'] }]));
+    if (!map) return next(error.notFound({ id: ['Map not found.'] }));
 
-    res.status(ResponseStatus.Success).json(sanitizeMap(map));
+    return res.status(ResponseStatus.Success).json(sanitizeMap(map));
 };
 
 export default getMap;

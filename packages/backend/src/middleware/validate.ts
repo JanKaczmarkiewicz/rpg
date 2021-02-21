@@ -1,6 +1,6 @@
 import { RequestHandler, Request } from 'express';
 import * as yup from 'yup';
-import { ValidationError } from './errorHandler';
+import { error } from './errorHandler';
 
 export const formatValidationError = (err: yup.ValidationError) =>
     err.inner.reduce((prev, { path = '', errors }) => ({ ...prev, [path]: errors }), {});
@@ -12,7 +12,7 @@ const validate = (
     try {
         await schema.validate(req[path], { abortEarly: false });
     } catch (err: unknown) {
-        if (err instanceof yup.ValidationError) return next(new ValidationError(formatValidationError(err)));
+        if (err instanceof yup.ValidationError) return next(error.validate(formatValidationError(err)));
     }
     next();
 };

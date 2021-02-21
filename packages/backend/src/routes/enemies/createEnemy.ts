@@ -1,6 +1,7 @@
-import { Request, Response, RequestHandler } from 'express';
+import { RequestHandler } from 'express';
 import { number, object, string } from 'yup';
 import { ResponseStatus } from '../../constants/constants';
+import { error } from '../../middleware/errorHandler';
 import validate from '../../middleware/validate';
 import { EnemyDbObject } from '../../models/Enemy/Enemy';
 import { sanitizeEnemy } from './shared/sanitize';
@@ -28,7 +29,9 @@ const createEnemy: RequestHandler = async (req, res, next) => {
         const enemy = await new Enemy(newEnemy).save();
 
         return res.status(ResponseStatus.Created).json(sanitizeEnemy(enemy));
-    } catch {}
+    } catch {
+        return next(error.unknown());
+    }
 };
 
 export default createEnemy;

@@ -10,7 +10,7 @@ const getEnemies: RequestHandler = async (req, res) => {
 
     const maps = await Enemy.find();
 
-    res.status(ResponseStatus.Success).json(maps.map(sanitizeEnemy));
+    return res.status(ResponseStatus.Success).json(maps.map(sanitizeEnemy));
 };
 
 export default getEnemies;

@@ -18,6 +18,7 @@ export enum ResponseStatus {
     Success = 200,
     BadRequest = 400,
     Created = 201,
+    InternalServerError = 500,
 }
 
 export enum HttpMethod {

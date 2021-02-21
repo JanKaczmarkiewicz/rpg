@@ -1,9 +1,10 @@
 import { ResponseStatus } from '../../constants/constants';
 import { sanitizeEnemy } from './shared/sanitize';
 import { Request, RequestHandler, Response } from 'express';
-import validate, { errors } from '../../middleware/validate';
+import validate from '../../middleware/validate';
 import { object, string } from 'yup';
 import { EnemyObjectResponse } from './shared/types';
+import { error } from '../../middleware/errorHandler';
 
 export type GetEnemyParams = { id: string };
 
@@ -16,15 +17,15 @@ export const validateGetEnemyParams = validate(
     }),
 );
 
-const getEnemy: RequestHandler<GetEnemyParams> = async (req, res) => {
+const getEnemy: RequestHandler<GetEnemyParams> = async (req, res, next) => {
     const { Enemy } = req.context.models;
     const { id } = req.params;
 
     const enemy = await Enemy.findById(id);
 
-    if (!enemy) return res.status(ResponseStatus.NotFound).json(errors([{ path: 'id', messages: ['Not found'] }]));
+    if (!enemy) return next(error.notFound({ id: ['Map not found.'] }));
 
-    res.status(ResponseStatus.Success).json(sanitizeEnemy(enemy));
+    return res.status(ResponseStatus.Success).json(sanitizeEnemy(enemy));
 };
 
 export default getEnemy;

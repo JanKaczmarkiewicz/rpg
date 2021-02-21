@@ -10,7 +10,7 @@ const getMaps: RequestHandler = async (req, res) => {
 
     const maps = await Map.find();
 
-    res.status(ResponseStatus.Success).json(maps.map(sanitizeMap));
+    return res.status(ResponseStatus.Success).json(maps.map(sanitizeMap));
 };
 
 export default getMaps;

@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import { string, object, array, lazy } from 'yup';
 import { ContentKind, ResponseStatus } from '../../constants/constants';
+import { error } from '../../middleware/errorHandler';
 import validate from '../../middleware/validate';
 import { Content, MapDbObject } from '../../models/Map/Map';
 import { sanitizeMap } from './shared/sanitize';
@@ -45,7 +46,7 @@ export const validateCreateMapBody = validate(
     }),
 );
 
-const createMap: RequestHandler<{}, {}, CreateMapBody> = async (req, res) => {
+const createMap: RequestHandler<{}, {}, CreateMapBody> = async (req, res, next) => {
     const { Map } = req.context.models;
     const newMap = req.body;
 
@@ -53,9 +54,8 @@ const createMap: RequestHandler<{}, {}, CreateMapBody> = async (req, res) => {
         const doc = await new Map(newMap).save();
 
         return res.status(ResponseStatus.Created).json(sanitizeMap(doc));
-    } catch (error) {
-        // TODO: send error message
-        return res.status(ResponseStatus.BadRequest).json();
+    } catch {
+        return next(error.unknown());
     }
 };
 

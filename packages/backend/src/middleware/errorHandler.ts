@@ -5,30 +5,24 @@ type Messages = Record<string, string[]>;
 
 enum ErrorKind {
     Validation = 'Validation',
+    NotFound = 'NotFound',
+    Unknown = 'Unknown',
 }
 
 interface Error {
     meta: Messages;
     kind: ErrorKind;
-}
-export class ValidationError implements Error {
-    kind = ErrorKind.Validation;
-    meta;
-
-    constructor(meta: Messages) {
-        this.meta = meta;
-    }
+    status: ResponseStatus;
 }
 
-const formatError = (error: ValidationError) => ({
-    error: {
-        kind: error.kind,
-        meta: error.meta,
-    },
-});
+export const error: Record<string, (meta?: Messages) => Error> = {
+    validation: (meta = {}) => ({ meta, status: ResponseStatus.BadRequest, kind: ErrorKind.Validation }),
+    notFound: (meta = {}) => ({ meta, status: ResponseStatus.NotFound, kind: ErrorKind.NotFound }),
+    unknown: (meta = {}) => ({ meta, status: ResponseStatus.InternalServerError, kind: ErrorKind.Unknown }),
+};
 
-const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-    if (err instanceof ValidationError) return res.status(ResponseStatus.BadRequest).json(formatError(err));
+const errorHandler: ErrorRequestHandler = ({ kind, status, meta }: Error, req, res, next) => {
+    return res.status(status).json({ error: { kind, meta } });
 };
 
 export default errorHandler;
