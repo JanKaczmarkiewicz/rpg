@@ -3,9 +3,9 @@ import { string, object, array, lazy } from 'yup';
 import { ContentKind, ResponseStatus } from '../../constants/constants';
 import { error } from '../../middleware/errorHandler';
 import validate from '../../middleware/validate';
-import { Content, MapDbObject } from '../../models/Map/Map';
 import { sanitizeMap } from './shared/sanitize';
 import { MapObjectResponse } from './shared/types';
+import { Content, MapDbObject } from '../../models/Map/Map';
 
 export type CreateMapBody = Pick<MapDbObject, 'backgroundUrl' | 'name' | 'tiles'>;
 

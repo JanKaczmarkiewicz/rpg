@@ -3,9 +3,9 @@ import { number, object, string } from 'yup';
 import { ResponseStatus } from '../../constants/constants';
 import { error } from '../../middleware/errorHandler';
 import validate from '../../middleware/validate';
-import { EnemyDbObject } from '../../models/Enemy/Enemy';
 import { sanitizeEnemy } from './shared/sanitize';
 import { EnemyObjectResponse } from './shared/types';
+import { EnemyDbObject } from '../../models/Enemy/Enemy';
 
 export type CreateEnemyBody = Pick<EnemyDbObject, 'description' | 'name' | 'level' | 'imageUrl'>;
 

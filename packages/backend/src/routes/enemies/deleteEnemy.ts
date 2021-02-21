@@ -1,10 +1,14 @@
 import { RequestHandler } from 'express';
 import { object, string } from 'yup';
 import { ResponseStatus } from '../../constants/constants';
-import validate from '../../middleware/validate';
+import { sanitizeEnemy } from './shared/sanitize';
+import { EnemyObjectResponse } from './shared/types';
 import { error } from '../../middleware/errorHandler';
+import validate from '../../middleware/validate';
 
 export type DeleteEnemyParams = { id: string };
+
+export type DeleteEnemyResponse = EnemyObjectResponse;
 
 export const validateDeleteEnemyParams = validate(
     'params',
@@ -21,7 +25,7 @@ const deleteEnemy: RequestHandler<DeleteEnemyParams> = async (req, res, next) =>
 
     if (!deletedEnemy) return next(error.notFound({ id: ['Enemy not found.'] }));
 
-    return res.status(ResponseStatus.Success).json({ deleted: true });
+    return res.status(ResponseStatus.Success).json(sanitizeEnemy(deletedEnemy));
 };
 
 export default deleteEnemy;

@@ -1,10 +1,10 @@
-import { ResponseStatus } from '../../constants/constants';
-import { sanitizeEnemy } from './shared/sanitize';
-import { Request, RequestHandler, Response } from 'express';
-import validate from '../../middleware/validate';
+import { RequestHandler } from 'express';
 import { object, string } from 'yup';
-import { EnemyObjectResponse } from './shared/types';
+import validate from '../../middleware/validate';
 import { error } from '../../middleware/errorHandler';
+import { sanitizeEnemy } from './shared/sanitize';
+import { EnemyObjectResponse } from './shared/types';
+import { ResponseStatus } from '../../constants/constants';
 
 export type GetEnemyParams = { id: string };
 

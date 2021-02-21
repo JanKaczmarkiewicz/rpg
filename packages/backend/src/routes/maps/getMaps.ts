@@ -1,6 +1,6 @@
+import { RequestHandler } from 'express';
 import { ResponseStatus } from '../../constants/constants';
 import { sanitizeMap } from './shared/sanitize';
-import { RequestHandler } from 'express';
 import { MapObjectResponse } from './shared/types';
 
 export type GetMapsResponse = MapObjectResponse[];

@@ -1,6 +1,6 @@
 import { ResponseStatus } from '../../constants/constants';
 import { sanitizeEnemy } from './shared/sanitize';
-import { Request, RequestHandler, Response } from 'express';
+import { RequestHandler } from 'express';
 import { EnemyObjectResponse } from './shared/types';
 
 export type GetEnemiesResponse = EnemyObjectResponse[];
