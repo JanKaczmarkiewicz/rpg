@@ -6,7 +6,7 @@ import Header from '../../components/AppHeader/AppHeader';
 import LeftMenu from '../../components/LeftMenu/LeftMenu';
 import { Provider } from 'react-redux';
 import { GetServerSideProps } from 'next';
-import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shered/types';
+import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shared/types';
 import useStoreInitialize from '../../hooks/useStoreInitialize';
 import client from '../../apiClient/client';
 

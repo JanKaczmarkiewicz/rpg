@@ -1,7 +1,7 @@
 import { ResponseStatus } from '../../constants/constants';
 import { object, string } from 'yup';
 import validate from '../../middleware/validate';
-import { Response, Request } from 'express';
+import { Response, Request, RequestHandler } from 'express';
 
 export type DeleteMapParams = { id: string };
 
@@ -12,7 +12,7 @@ export const validateDeleteMapParams = validate(
     }),
 );
 
-const deleteMap = async (req: Request<DeleteMapParams>, res: Response) => {
+const deleteMap: RequestHandler<DeleteMapParams> = async (req, res) => {
     const { Map } = req.context.models;
     const { id } = req.params;
 

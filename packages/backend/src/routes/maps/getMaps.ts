@@ -1,11 +1,11 @@
 import { ResponseStatus } from '../../constants/constants';
-import { sanitizeMap } from './shered/sanitize';
-import { Request, Response } from 'express';
-import { MapObjectResponse } from './shered/types';
+import { sanitizeMap } from './shared/sanitize';
+import { RequestHandler } from 'express';
+import { MapObjectResponse } from './shared/types';
 
 export type GetMapsResponse = MapObjectResponse[];
 
-const getMaps = async (req: Request, res: Response) => {
+const getMaps: RequestHandler = async (req, res) => {
     const { Map } = req.context.models;
 
     const maps = await Map.find();

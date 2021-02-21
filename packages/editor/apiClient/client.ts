@@ -3,6 +3,10 @@ import { CreateMapBody, CreateMapResponse } from '@rpg/backend/src/routes/maps/c
 import { DeleteMapParams } from '@rpg/backend/src/routes/maps/deleteMap';
 import { GetMapParams, GetMapResponse } from '@rpg/backend/src/routes/maps/getMap';
 import { GetMapsResponse } from '@rpg/backend/src/routes/maps/getMaps';
+import { CreateEnemyBody, CreateEnemyResult } from '@rpg/backend/src/routes/enemies/createEnemy';
+import { GetEnemyParams, GetEnemyResult } from '@rpg/backend/src/routes/enemies/getEnemy';
+import { GetEnemiesResponse } from '@rpg/backend/src/routes/enemies/getEnemies';
+import { DeleteEnemyParams } from '@rpg/backend/src/routes/enemies/deleteEnemy';
 
 type RequestOptions = Omit<RequestInit, 'body'> & { url: string; body?: Record<string, any> };
 
@@ -20,6 +24,7 @@ const request = async <T>({ url, body, ...options }: RequestOptions): Promise<T>
 class ApiClient {
     baseUrl: string = 'http://localhost:3001/api';
     mapRoute: string = `${this.baseUrl}/maps`;
+    enemyRoute: string = `${this.baseUrl}/maps`;
 
     map = () => ({
         create: (payload: CreateMapBody) =>
@@ -28,6 +33,16 @@ class ApiClient {
             request<GetMapResponse>({ url: `${this.mapRoute}/${id}`, method: HttpMethod.Get }),
         getMany: () => request<GetMapsResponse>({ url: this.mapRoute, method: HttpMethod.Get }),
         deleteOne: ({ id }: DeleteMapParams) => request({ url: `${this.mapRoute}/${id}`, method: HttpMethod.Delete }),
+    });
+
+    enemy = () => ({
+        create: (payload: CreateEnemyBody) =>
+            request<CreateEnemyResult>({ url: this.enemyRoute, body: payload, method: HttpMethod.Post }),
+        getOne: ({ id }: GetEnemyParams) =>
+            request<GetEnemyResult>({ url: `${this.enemyRoute}/${id}`, method: HttpMethod.Get }),
+        getMany: () => request<GetEnemiesResponse>({ url: this.enemyRoute, method: HttpMethod.Get }),
+        deleteOne: ({ id }: DeleteEnemyParams) =>
+            request({ url: `${this.enemyRoute}/${id}`, method: HttpMethod.Delete }),
     });
 }
 

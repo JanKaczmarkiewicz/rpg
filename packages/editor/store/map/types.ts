@@ -1,5 +1,5 @@
 import { ContentKind } from '@rpg/backend/src/constants/constants';
-import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shered/types';
+import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shared/types';
 import { setTileContent } from './actions/setTileContent';
 
 export enum EditMode {

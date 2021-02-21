@@ -1,8 +1,14 @@
-import { Request, Response } from 'express';
+import { Request, Response, RequestHandler } from 'express';
 import { number, object, string } from 'yup';
 import { ResponseStatus } from '../../constants/constants';
 import validate from '../../middleware/validate';
-import { sanitizeEnemy } from './shered/sanitize';
+import { EnemyDbObject } from '../../models/Enemy/Enemy';
+import { sanitizeEnemy } from './shared/sanitize';
+import { EnemyObjectResponse } from './shared/types';
+
+export type CreateEnemyBody = Pick<EnemyDbObject, 'description' | 'name' | 'level' | 'imageUrl'>;
+
+export type CreateEnemyResult = EnemyObjectResponse;
 
 export const validateCreateEnemyBody = validate(
     'body',
@@ -14,7 +20,7 @@ export const validateCreateEnemyBody = validate(
     }),
 );
 
-const createEnemy = async (req: Request, res: Response) => {
+const createEnemy: RequestHandler = async (req, res, next) => {
     const { Enemy } = req.context.models;
     const newEnemy = req.body;
 
@@ -22,10 +28,7 @@ const createEnemy = async (req: Request, res: Response) => {
         const enemy = await new Enemy(newEnemy).save();
 
         return res.status(ResponseStatus.Created).json(sanitizeEnemy(enemy));
-    } catch (error) {
-        // TODO: send proper error message
-        return res.status(ResponseStatus.BadRequest).json();
-    }
+    } catch {}
 };
 
 export default createEnemy;

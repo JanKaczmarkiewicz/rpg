@@ -6,4 +6,5 @@ export const sanitizeEnemy = (doc: EnemyDbObject): EnemyObjectResponse => ({
     name: doc.name,
     description: doc.description,
     level: doc.level,
+    imageUrl: doc.imageUrl,
 });

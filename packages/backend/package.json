@@ -4,7 +4,7 @@
     "private": true,
     "main": "/src/index.ts",
     "scripts": {
-        "dev": "ts-node-dev --files src/index.ts "
+        "dev": "ts-node-dev --files src/index.ts"
     },
     "dependencies": {
         "@types/cors": "^2.8.9",

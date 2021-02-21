@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
 import { Container, List, ListItem, ListItemText } from '@material-ui/core';
-import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shered/types';
+import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shared/types';
 import Header from '../components/AppHeader/AppHeader';
 import AddMapButton from '../components/AddMapButton/AddMapButton';
 import client from '../apiClient/client';

@@ -1,9 +1,9 @@
 import { object, string } from 'yup';
 import validate, { errors } from '../../middleware/validate';
 import { ResponseStatus } from '../../constants/constants';
-import { sanitizeMap } from './shered/sanitize';
+import { sanitizeMap } from './shared/sanitize';
 import { Request, Response } from 'express';
-import { MapObjectResponse } from './shered/types';
+import { MapObjectResponse } from './shared/types';
 
 export type GetMapParams = { id: string };
 

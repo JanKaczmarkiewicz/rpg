@@ -8,6 +8,8 @@ import './setupYup';
 
 import modelContextMiddleware from '../middleware/modelContext';
 import mapsRouter from '../routes/maps';
+import enemiesRouter from '../routes/enemies';
+import errorHandler from '../middleware/errorHandler';
 
 async function server() {
     const app = express();
@@ -19,6 +21,8 @@ async function server() {
     app.use(cors());
     app.use(modelContextMiddleware);
     app.use('/api/maps', mapsRouter);
+    app.use('/api/enemies', enemiesRouter);
+    app.use(errorHandler);
 
     app.listen(process.env.SERVER_PORT);
     logger.info(`Server started on port ${process.env.SERVER_PORT}.`);

@@ -1,8 +1,11 @@
 import { ResponseStatus } from '../../constants/constants';
-import { sanitizeEnemy } from './shered/sanitize';
-import { Request, Response } from 'express';
+import { sanitizeEnemy } from './shared/sanitize';
+import { Request, RequestHandler, Response } from 'express';
+import { EnemyObjectResponse } from './shared/types';
 
-const getEnemies = async (req: Request, res: Response) => {
+export type GetEnemiesResponse = EnemyObjectResponse[];
+
+const getEnemies: RequestHandler = async (req, res) => {
     const { Enemy } = req.context.models;
 
     const maps = await Enemy.find();

@@ -1,9 +1,9 @@
 import { ResponseStatus } from '../../constants/constants';
 import { object, string } from 'yup';
 import validate from '../../middleware/validate';
-import { Response, Request } from 'express';
+import { Response, Request, RequestHandler } from 'express';
 
-type DeleteEnemyParams = { id: string };
+export type DeleteEnemyParams = { id: string };
 
 export const validateDeleteEnemyParams = validate(
     'params',
@@ -12,7 +12,7 @@ export const validateDeleteEnemyParams = validate(
     }),
 );
 
-const deleteEnemy = async (req: Request<DeleteEnemyParams>, res: Response) => {
+const deleteEnemy: RequestHandler<DeleteEnemyParams> = async (req, res) => {
     const { Enemy } = req.context.models;
     const { id } = req.params;
 

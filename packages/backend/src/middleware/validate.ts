@@ -1,15 +1,9 @@
 import { RequestHandler, Request } from 'express';
 import * as yup from 'yup';
-import { ResponseStatus } from '../constants/constants';
+import { ValidationError } from './errorHandler';
 
-type RequestError = { path: string; messages: string[] };
-
-export const formatValidationError = (err: yup.ValidationError): RequestError[] =>
-    err.inner.map(({ path, errors }) => ({ path: path || 'undefined', messages: errors }));
-
-export const errors = (errors: RequestError[]) => ({
-    errors,
-});
+export const formatValidationError = (err: yup.ValidationError) =>
+    err.inner.reduce((prev, { path = '', errors }) => ({ ...prev, [path]: errors }), {});
 
 const validate = (
     path: keyof Pick<Request, 'body' | 'params'>,
@@ -17,13 +11,10 @@ const validate = (
 ): RequestHandler => async (req, res, next) => {
     try {
         await schema.validate(req[path], { abortEarly: false });
-        next();
     } catch (err: unknown) {
-        if (err instanceof yup.ValidationError)
-            return res.status(ResponseStatus.BadRequest).json(errors(formatValidationError(err)));
-
-        return res.status(ResponseStatus.BadRequest);
+        if (err instanceof yup.ValidationError) return next(new ValidationError(formatValidationError(err)));
     }
+    next();
 };
 
 export default validate;

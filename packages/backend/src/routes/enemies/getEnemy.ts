@@ -1,10 +1,13 @@
 import { ResponseStatus } from '../../constants/constants';
-import { sanitizeEnemy } from './shered/sanitize';
-import { Request, Response } from 'express';
+import { sanitizeEnemy } from './shared/sanitize';
+import { Request, RequestHandler, Response } from 'express';
 import validate, { errors } from '../../middleware/validate';
 import { object, string } from 'yup';
+import { EnemyObjectResponse } from './shared/types';
 
-type GetEnemyParams = { id: string };
+export type GetEnemyParams = { id: string };
+
+export type GetEnemyResult = EnemyObjectResponse;
 
 export const validateGetEnemyParams = validate(
     'params',
@@ -13,7 +16,7 @@ export const validateGetEnemyParams = validate(
     }),
 );
 
-const getEnemy = async (req: Request<GetEnemyParams>, res: Response) => {
+const getEnemy: RequestHandler<GetEnemyParams> = async (req, res) => {
     const { Enemy } = req.context.models;
     const { id } = req.params;
 
