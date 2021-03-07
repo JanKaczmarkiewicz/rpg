@@ -1,30 +1,36 @@
 {
-  "name": "editor",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.1.4",
-    "@emotion/styled": "^11.0.0",
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.11.2",
-    "@types/react-redux": "^7.1.15",
-    "@types/redux": "^3.6.0",
-    "@types/redux-saga": "^0.10.5",
-    "immer": "^8.0.0",
-    "next": "9.5.3",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5",
-    "redux-saga": "^1.1.3"
-  },
-  "devDependencies": {
-    "@types/react": "^16.9.50",
-    "typescript": "^4.0.3"
-  }
+    "name": "editor",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.1.4",
+        "@emotion/styled": "^11.0.0",
+        "@material-ui/core": "^4.11.0",
+        "@material-ui/icons": "^4.11.2",
+        "@rpg/backend": "~0.1.0",
+        "@types/react-redux": "^7.1.15",
+        "@types/redux": "^3.6.0",
+        "formik": "^2.2.6",
+        "immer": "^8.0.0",
+        "isomorphic-fetch": "^3.0.0",
+        "next": "9.5.3",
+        "next-transpile-modules": "^6.3.0",
+        "react": "16.13.1",
+        "react-dom": "16.13.1",
+        "react-query": "^3.9.8",
+        "react-redux": "^7.2.2",
+        "redux": "^4.0.5",
+        "redux-devtools-extension": "^2.13.8",
+        "redux-thunk": "^2.3.0"
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.50",
+        "@types/react-query": "^1.1.2",
+        "typescript": "^4.0.3"
+    }
 }

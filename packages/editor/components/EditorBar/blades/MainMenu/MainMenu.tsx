@@ -5,12 +5,12 @@ import {
     ViewQuilt as ViewQuiltIcon,
     SettingsInputSvideo as SettingsInputSvideoIcon,
 } from '@material-ui/icons';
-import { LocalizeKey, useLocalize } from '../../../../localization/useLocalize';
+import localize, { LocalizeKey } from '../../../../localization/localize';
 import SectionTitle from '../../common/SectionTitle';
-import { EditMode } from '../../constants';
+import { EditMode } from '../../../../store/map/types';
 
 const options: { optionTextKey: LocalizeKey; icon: ReactNode; mode: EditMode }[] = [
-    { optionTextKey: 'editWalls', icon: <ViewQuiltIcon />, mode: EditMode.Collision },
+    { optionTextKey: 'editWalls', icon: <ViewQuiltIcon />, mode: EditMode.Wall },
     { optionTextKey: 'editEnemies', icon: <SettingsInputSvideoIcon />, mode: EditMode.Enemy },
     { optionTextKey: 'editNPCs', icon: <EmojiPeopleIcon />, mode: EditMode.Npc },
 ];
@@ -20,7 +20,6 @@ type MainMenuProps = {
 };
 
 const MainMenu: FunctionComponent<MainMenuProps> = ({ onMenuItemClick }) => {
-    const localize = useLocalize();
     return (
         <>
             <SectionTitle>{localize('whatYouWantToDo')}</SectionTitle>

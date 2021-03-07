@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core';
 
-const theme = createMuiTheme({ zIndex: { appBar: 1200, drawer: 1100 } });
+const theme = createMuiTheme({ zIndex: { appBar: 1200, drawer: 1100, tooltip: 100 } });
 
 export default theme;

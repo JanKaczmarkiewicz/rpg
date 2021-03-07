@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "dev:editor": "cd packages/editor/ && yarn dev",
+        "dev:backend": "cd packages/backend/ && yarn dev",
         "eslint": "eslint --ext .js,.jsx,.ts,.tsx ./"
     },
     "private": true,

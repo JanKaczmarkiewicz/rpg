@@ -1,19 +1,15 @@
 import React from 'react';
-// Providers
-import { Provider } from 'react-redux';
-import { ThemeProvider } from '@material-ui/core';
-// Values
-import store from '../store';
-import theme from '../theme/muiTheme';
+import { AppProps } from 'next/dist/next-server/lib/router/router';
+import muiTheme from '../theme/muiTheme';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core';
+import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
+import emotionTheme from '../theme/emotionTheme';
 
-const App = ({ Component, pageProps }) => {
-    return (
-        <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <Component {...pageProps} />
-            </ThemeProvider>
-        </Provider>
-    );
-};
-
+const App = ({ Component, pageProps }: AppProps) => (
+    <MuiThemeProvider theme={muiTheme}>
+        <EmotionThemeProvider theme={emotionTheme}>
+            <Component {...pageProps} />
+        </EmotionThemeProvider>
+    </MuiThemeProvider>
+);
 export default App;

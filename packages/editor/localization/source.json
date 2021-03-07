@@ -4,5 +4,10 @@
     "editEnemies": "Edit enemies",
     "editNPCs": "Edit NPCs",
     "editWalls": "Edit walls",
-    "back": "Back"
+    "back": "Back",
+    "addMap": "Add map",
+    "name": "Name",
+    "mapBackgroundUrl": "Map background URL",
+    "create": "Create",
+    "close": "Close"
 }

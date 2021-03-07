@@ -3,11 +3,14 @@ import { FunctionComponent } from 'react';
 
 const AppHeader: FunctionComponent = () => {
     return (
-        <AppBar position="fixed">
-            <Toolbar>
-                <Typography variant="h6">Map editor</Typography>
-            </Toolbar>
-        </AppBar>
+        <>
+            <AppBar position="fixed">
+                <Toolbar>
+                    <Typography variant="h6">Map editor</Typography>
+                </Toolbar>
+            </AppBar>
+            <Toolbar />
+        </>
     );
 };
 

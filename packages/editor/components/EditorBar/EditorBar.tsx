@@ -1,34 +1,43 @@
-import React, { createElement, FunctionComponent, useState } from 'react';
+import React, { createElement, FunctionComponent } from 'react';
 import { Box, Button } from '@material-ui/core';
-import { EditMode } from './constants';
-import { useLocalize } from '../../localization/useLocalize';
+import { EditMode } from '../../store/map/types';
 
 // Blades
 import MainMenuBlade from './blades/MainMenu/MainMenu';
 import NpcsEditor from './blades/NpcsEditor/NpcsEditor';
 import EnemiesEditor from './blades/EnemiesEditor/EnemiesEditor';
 import CollisionsEditor from './blades/CollisionsEditor/CollisionsEditor';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectEditorMode } from '../../store/map/selectors';
+import { setEditorMode } from '../../store/map/actions/setEditorMode';
+import localize from '../../localization/localize';
 
-const BLADES = {
-    [EditMode.Collision]: CollisionsEditor,
+const BLADES: { [key in EditMode]: React.FunctionComponent<{}> } = {
+    [EditMode.Wall]: CollisionsEditor,
     [EditMode.Npc]: NpcsEditor,
     [EditMode.Enemy]: EnemiesEditor,
 };
 
 const EditorBar: FunctionComponent = () => {
-    const [mode, setMode] = useState<null | EditMode>(null);
-    const localize = useLocalize();
+    const dispatch = useDispatch();
+
+    const editorMode = useSelector(selectEditorMode);
 
     const onBackClick = (): void => {
-        setMode(null);
+        dispatch(setEditorMode({ mode: null }));
+    };
+
+    const onMenuItemClick = (mode: EditMode): void => {
+        dispatch(setEditorMode({ mode }));
     };
 
     const getBlade = (): React.ReactNode => {
-        if (!mode) return <MainMenuBlade onMenuItemClick={setMode} />;
+        if (!editorMode) return <MainMenuBlade onMenuItemClick={onMenuItemClick} />;
+
         return (
             <>
                 <Button onClick={onBackClick}>{localize('back')}</Button>
-                {createElement(BLADES[mode])}
+                {createElement(BLADES[editorMode])}
             </>
         );
     };
