@@ -5,7 +5,7 @@ export type SetTileContentMutation = (state: State, payload: SetTileContentPaylo
 export type SetTileContentPayload = {
     x: number;
     y: number;
-    content: { kind: TileData['kind'] };
+    content: TileData;
 };
 
 export const SET_TILE_CONTENT = 'SET_TILE_CONTENT';

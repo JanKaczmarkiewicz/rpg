@@ -23,6 +23,7 @@ const EnemiesEditor: FunctionComponent = () => {
     const { data = [] } = useQuery('enemies', client.enemy.getMany);
 
     const onSelectCharacter = (enemy: EnemyObjectResponse) => {
+        console.log(enemy);
         dispatch(setEditorSelectedEnemy({ enemy }));
     };
 
