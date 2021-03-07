@@ -1,12 +1,30 @@
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import { FunctionComponent } from 'react';
+import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { FunctionComponent, ReactNode } from 'react';
 
-const AppHeader: FunctionComponent = () => {
+type AppHeaderProps = {
+    text: string;
+    actions?: ReactNode;
+};
+
+const useActionsContainerStyles = makeStyles((theme) => ({
+    root: { gap: theme.spacing(2), display: 'flex' },
+}));
+
+const useToolbarStyles = makeStyles({
+    root: { display: 'flex', justifyContent: 'space-between' },
+});
+
+const AppHeader: FunctionComponent<AppHeaderProps> = ({ text, actions }) => {
+    const actionsContainerClasses = useActionsContainerStyles();
+    const toolbarClasses = useToolbarStyles();
+
+    console.log(actions);
     return (
         <>
             <AppBar position="fixed">
-                <Toolbar>
-                    <Typography variant="h6">Map editor</Typography>
+                <Toolbar classes={toolbarClasses}>
+                    <Typography variant="h6">{text}</Typography>
+                    <div className={actionsContainerClasses.root}>{actions}</div>
                 </Toolbar>
             </AppBar>
             <Toolbar />

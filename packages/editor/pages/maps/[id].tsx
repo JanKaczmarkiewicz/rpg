@@ -6,10 +6,12 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shared/types';
 import EditedMap from '../../components/EditedMap/EditedMap';
-import Header from '../../components/AppHeader/AppHeader';
+import AppHeader from '../../components/AppHeader/AppHeader';
 import LeftMenu from '../../components/LeftMenu/LeftMenu';
 import useStoreInitialize from '../../hooks/useStoreInitialize';
 import client from '../../apiClient/client';
+import localize from '../../localization/localize';
+import { Button } from '@material-ui/core';
 
 type MapProps = { map: MapObjectResponse };
 
@@ -26,13 +28,22 @@ const MapRoute: FunctionComponent<MapProps> = ({ map }) => {
         },
     });
 
+    const onMapSave = () => {};
+
     return (
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>
                 <Head>
                     <title>RPG editor</title>
                 </Head>
-                <Header />
+                <AppHeader
+                    text={localize('map')}
+                    actions={
+                        <Button onClick={onMapSave} variant="contained">
+                            {localize('save')}
+                        </Button>
+                    }
+                />
                 <LeftMenu />
                 <main>
                     <EditedMap />

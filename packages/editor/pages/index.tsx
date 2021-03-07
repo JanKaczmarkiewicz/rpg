@@ -4,9 +4,10 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { Container, List, ListItem, ListItemText } from '@material-ui/core';
 import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shared/types';
-import Header from '../components/AppHeader/AppHeader';
+import AppHeader from '../components/AppHeader/AppHeader';
 import AddMapButton from '../components/AddMapButton/AddMapButton';
 import client from '../apiClient/client';
+import localize from '../localization/localize';
 
 type MapsProps = {
     maps: MapObjectResponse[];
@@ -16,9 +17,9 @@ const Maps: FunctionComponent<MapsProps> = ({ maps }) => {
     return (
         <div>
             <Head>
-                <title>Maps</title>
+                <title>{localize('maps')}</title>
             </Head>
-            <Header />
+            <AppHeader text={localize('maps')} />
             <main>
                 <Container maxWidth="sm">
                     <AddMapButton />

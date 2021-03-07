@@ -9,5 +9,8 @@
     "name": "Name",
     "mapBackgroundUrl": "Map background URL",
     "create": "Create",
-    "close": "Close"
+    "close": "Close",
+    "maps": "Maps",
+    "map": "Map",
+    "save": "Save"
 }
