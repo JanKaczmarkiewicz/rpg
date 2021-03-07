@@ -2,25 +2,25 @@ import React, { FunctionComponent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { Box, Button, TextField } from '@material-ui/core';
-import { useLocalize } from '../../localization/useLocalize';
+import { CreateMapBody } from '@rpg/backend/src/routes/maps/createMap';
 import Modal from '../atom/Modal';
 import MapPreviewField from '../MapPreviewField/MapPreviewField';
 import client from '../../apiClient/client';
+import localize from '../../localization/localize';
 
-const initialValues = {
+const initialValues: CreateMapBody = {
     name: '',
     backgroundUrl: '',
     tiles: [],
 };
 
 const AddMapButton: FunctionComponent = () => {
-    const localize = useLocalize();
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
     const { resetForm, submitForm, values, handleChange } = useFormik({
         initialValues,
         onSubmit: async (values) => {
-            const result = await client.map().create(values);
+            const result = await client.map.create(values);
             router.push(`/maps/${result.id}`);
         },
     });

@@ -5,7 +5,7 @@ import {
     ViewQuilt as ViewQuiltIcon,
     SettingsInputSvideo as SettingsInputSvideoIcon,
 } from '@material-ui/icons';
-import { LocalizeKey, useLocalize } from '../../../../localization/useLocalize';
+import localize, { LocalizeKey } from '../../../../localization/localize';
 import SectionTitle from '../../common/SectionTitle';
 import { EditMode } from '../../../../store/map/types';
 
@@ -20,7 +20,6 @@ type MainMenuProps = {
 };
 
 const MainMenu: FunctionComponent<MainMenuProps> = ({ onMenuItemClick }) => {
-    const localize = useLocalize();
     return (
         <>
             <SectionTitle>{localize('whatYouWantToDo')}</SectionTitle>

@@ -5,9 +5,15 @@ import { error } from '../../middleware/errorHandler';
 import validate from '../../middleware/validate';
 import { sanitizeMap } from './shared/sanitize';
 import { MapObjectResponse } from './shared/types';
-import { Content, MapDbObject } from '../../models/Map/Map';
+import { MapDbObject } from '../../models/Map/Map';
 
-export type CreateMapBody = Pick<MapDbObject, 'backgroundUrl' | 'name' | 'tiles'>;
+type Content =
+    | { kind: ContentKind.Enemy; enemy: string }
+    | { kind: ContentKind.Wall }
+    | { kind: ContentKind.Empty }
+    | { kind: ContentKind.Npc };
+
+export type CreateMapBody = Pick<MapDbObject, 'backgroundUrl' | 'name'> & { tiles: Content[][] };
 
 export type CreateMapResponse = MapObjectResponse;
 
@@ -51,9 +57,9 @@ const createMap: RequestHandler<{}, {}, CreateMapBody> = async (req, res, next) 
     const newMap = req.body;
 
     try {
-        const doc = await new Map(newMap).save();
+        const map = await new Map(newMap).save();
 
-        return res.status(ResponseStatus.Created).json(sanitizeMap(doc));
+        return res.status(ResponseStatus.Created).json(sanitizeMap(map));
     } catch {
         return next(error.unknown());
     }

@@ -41,7 +41,7 @@ const Maps: FunctionComponent<MapsProps> = ({ maps }) => {
 };
 
 export const getStaticProps: GetStaticProps<MapsProps> = async () => {
-    const res = await client.map().getMany();
+    const res = await client.map.getMany();
 
     return {
         props: {

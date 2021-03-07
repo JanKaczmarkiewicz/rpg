@@ -1,6 +1,5 @@
 import React, { createElement, FunctionComponent } from 'react';
 import { Box, Button } from '@material-ui/core';
-import { useLocalize } from '../../localization/useLocalize';
 import { EditMode } from '../../store/map/types';
 
 // Blades
@@ -11,6 +10,7 @@ import CollisionsEditor from './blades/CollisionsEditor/CollisionsEditor';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectEditorMode } from '../../store/map/selectors';
 import { setEditorMode } from '../../store/map/actions/setEditorMode';
+import localize from '../../localization/localize';
 
 const BLADES: { [key in EditMode]: React.FunctionComponent<{}> } = {
     [EditMode.Wall]: CollisionsEditor,
@@ -19,7 +19,6 @@ const BLADES: { [key in EditMode]: React.FunctionComponent<{}> } = {
 };
 
 const EditorBar: FunctionComponent = () => {
-    const localize = useLocalize();
     const dispatch = useDispatch();
 
     const editorMode = useSelector(selectEditorMode);

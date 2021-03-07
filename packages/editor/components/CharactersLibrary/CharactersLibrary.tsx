@@ -2,9 +2,8 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import CharacterCard from './CharacterCard';
 import { CharacterCardDetails, CharacterLibraryProps } from './types';
-import { Character } from '../../store/map/types';
 
-const CharacterLibrary = <T extends Character>({
+const CharacterLibrary = <T extends { id: string }>({
     onSelect,
     selectedCharacterId,
     characters,
@@ -19,7 +18,7 @@ const CharacterLibrary = <T extends Character>({
             {characters.map((character) => (
                 <Grid item xs={12} key={character.id}>
                     <CharacterCard
-                        selected={(selectedCharacterId && selectedCharacterId === character.id) || undefined}
+                        selected={selectedCharacterId === character.id}
                         characterDetails={{ ...getCharacterCardDetails(character), __data: character }}
                         onClick={onCharacterSelect}
                     />

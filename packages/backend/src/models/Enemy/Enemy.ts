@@ -1,5 +1,5 @@
-import { Model } from '../../constants/constants';
 import { Schema, model, Document } from 'mongoose';
+import { Model } from '../../constants/constants';
 
 export interface EnemyDbObject extends Document {
     name: string;

@@ -4,7 +4,9 @@ import { Model, ContentKind } from '../../constants/constants';
 const tileContentSchemas = {
     [ContentKind.Enemy]: new Schema(
         { enemy: { type: Schema.Types.ObjectId, ref: Model.Enemy, required: true } },
-        { _id: false },
+        {
+            _id: false,
+        },
     ),
     [ContentKind.Npc]: new Schema(
         { npc: { type: Schema.Types.ObjectId, ref: Model.Npc, required: true } },

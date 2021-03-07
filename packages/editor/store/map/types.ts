@@ -1,4 +1,4 @@
-import { ContentKind } from '@rpg/backend/src/constants/constants';
+import { EnemyObjectResponse } from '@rpg/backend/src/routes/enemies/shared/types';
 import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shared/types';
 import { setTileContent } from './actions/setTileContent';
 
@@ -8,28 +8,6 @@ export enum EditMode {
     Enemy = 'Enemy',
 }
 
-interface TileContent {
-    kind: ContentKind;
-}
-
-export interface Enemy extends TileContent {
-    kind: ContentKind.Enemy;
-    enemy: {
-        id: string;
-        imageUrl: string;
-        level: number;
-        name: string;
-    };
-}
-
-export interface Wall extends TileContent {
-    kind: ContentKind.Wall;
-}
-
-export interface Npc extends TileContent {
-    kind: ContentKind.Npc;
-}
-
 export type TileData = MapObjectResponse['tiles'][number][number];
 
 export type State = {
@@ -37,8 +15,9 @@ export type State = {
     editor: {
         mode: EditMode | null;
         collisionData: {};
-        npcData: { selected: Npc | null };
-        enemyData: { selected: Enemy | null };
+        // TODO: add typings
+        npcData: { selected: any | null };
+        enemyData: { selected: EnemyObjectResponse | null };
     };
 };
 export type Action = ReturnType<typeof setTileContent>;

@@ -1413,12 +1413,35 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.2.tgz#93e25bf9ee75fe0fd80b594bc4feb0e862111b5a"
   integrity sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==
 
+"@types/mongodb@*":
+  version "3.6.8"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.6.8.tgz#f80f0a3022c44d8db659a936434403ca3f4661df"
+  integrity sha512-8qNbL5/GFrljXc/QijcuQcUMYZ1iWNcqnJ6tneROwbfU0LsAjQ9bmq3aHi5lWXM4cyBPd2F/n9INAk/pZZttHw==
+  dependencies:
+    "@types/bson" "*"
+    "@types/node" "*"
+
 "@types/mongodb@^3.5.27":
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.6.3.tgz#5655af409d9e32d5d5ae9a653abf3e5f9c83eb7a"
   integrity sha512-6YNqGP1hk5bjUFaim+QoFFuI61WjHiHE1BNeB41TA00Xd2K7zG4lcWyLLq/XtIp36uMavvS5hoAUJ+1u/GcX2Q==
   dependencies:
     "@types/bson" "*"
+    "@types/node" "*"
+
+"@types/mongoose-autopopulate@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@types/mongoose-autopopulate/-/mongoose-autopopulate-0.10.1.tgz#2b879fc2a93f74079d63b34f01acfead48a67a00"
+  integrity sha512-L67MAIE3WEoTtt7a7/spRYk+76lgp67FAP6I38Y9NcC1kQuzwqnukTaJzodfb8180wxHZM4qt68u6x6ptuDRaQ==
+  dependencies:
+    "@types/mongoose" "*"
+
+"@types/mongoose@*":
+  version "5.10.3"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.10.3.tgz#3bc6787245aa8ebbff4ed61da18f4775e0ec52cd"
+  integrity sha512-VfdnaFImXEJZZiuL2ID/ysZs4inOIjxwrAnUgkr5eum2O2BLhFkiSI0i87AwignVva1qWTJ3H3DyM0Rf4USJ4A==
+  dependencies:
+    "@types/mongodb" "*"
     "@types/node" "*"
 
 "@types/node@*":
@@ -5219,6 +5242,11 @@ mongodb@3.6.3:
     safe-buffer "^5.1.2"
   optionalDependencies:
     saslprep "^1.0.0"
+
+mongoose-autopopulate@^0.12.3:
+  version "0.12.3"
+  resolved "https://registry.yarnpkg.com/mongoose-autopopulate/-/mongoose-autopopulate-0.12.3.tgz#5bf111db3fa485f5031d3303f6f25625304888e3"
+  integrity sha512-yNmYsfi6OpS/GQ+48mkB0KQ199ExHmmPrt3wt3fyxPHPMtEBGts7yq3wBQR6VgKCPOQaKvCI1URbJCPOtrPeLw==
 
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"

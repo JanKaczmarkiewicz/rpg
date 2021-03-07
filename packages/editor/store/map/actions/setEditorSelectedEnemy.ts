@@ -1,9 +1,10 @@
+import { EnemyObjectResponse } from '@rpg/backend/src/routes/enemies/shared/types';
 import { createAction } from '../../helpers';
-import { Enemy, State } from '../types';
+import { State } from '../types';
 
 export type SetEditorSelectedEnemyMutation = (state: State, payload: SetEditorSelectedEnemyPayload) => void;
 export type SetEditorSelectedEnemyPayload = {
-    enemy: Enemy;
+    enemy: EnemyObjectResponse;
 };
 
 export const SET_EDITOR_SELECTED_ENEMY = 'SET_EDITOR_SELECTED_ENEMY';

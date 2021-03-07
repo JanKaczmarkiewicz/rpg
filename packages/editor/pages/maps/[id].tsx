@@ -1,16 +1,19 @@
 import React, { FunctionComponent } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'react-redux';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shared/types';
 import EditedMap from '../../components/EditedMap/EditedMap';
 import Header from '../../components/AppHeader/AppHeader';
 import LeftMenu from '../../components/LeftMenu/LeftMenu';
-import { Provider } from 'react-redux';
-import { GetServerSideProps } from 'next';
-import { MapObjectResponse } from '@rpg/backend/src/routes/maps/shared/types';
 import useStoreInitialize from '../../hooks/useStoreInitialize';
 import client from '../../apiClient/client';
 
 type MapProps = { map: MapObjectResponse };
+
+const queryClient = new QueryClient();
 
 const MapRoute: FunctionComponent<MapProps> = ({ map }) => {
     const store = useStoreInitialize({
@@ -24,21 +27,23 @@ const MapRoute: FunctionComponent<MapProps> = ({ map }) => {
     });
 
     return (
-        <Provider store={store}>
-            <Head>
-                <title>RPG editor</title>
-            </Head>
-            <Header />
-            <LeftMenu />
-            <main>
-                <EditedMap />
-            </main>
-        </Provider>
+        <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
+                <Head>
+                    <title>RPG editor</title>
+                </Head>
+                <Header />
+                <LeftMenu />
+                <main>
+                    <EditedMap />
+                </main>
+            </Provider>
+        </QueryClientProvider>
     );
 };
 
 export const getServerSideProps: GetServerSideProps<MapProps, { id: string }> = async ({ params }) => {
-    const result = await client.map().getOne(params || { id: '' });
+    const result = await client.map.getOne(params || { id: '' });
     return {
         props: { map: result },
     };

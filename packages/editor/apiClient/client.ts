@@ -26,16 +26,16 @@ class ApiClient {
     mapRoute: string = `${this.baseUrl}/maps`;
     enemyRoute: string = `${this.baseUrl}/enemies`;
 
-    map = () => ({
+    map = {
         create: (payload: CreateMapBody) =>
             request<CreateMapResponse>({ url: this.mapRoute, body: payload, method: HttpMethod.Post }),
         getOne: ({ id }: GetMapParams) =>
             request<GetMapResponse>({ url: `${this.mapRoute}/${id}`, method: HttpMethod.Get }),
         getMany: () => request<GetMapsResponse>({ url: this.mapRoute, method: HttpMethod.Get }),
         deleteOne: ({ id }: DeleteMapParams) => request({ url: `${this.mapRoute}/${id}`, method: HttpMethod.Delete }),
-    });
+    };
 
-    enemy = () => ({
+    enemy = {
         create: (payload: CreateEnemyBody) =>
             request<CreateEnemyResult>({ url: this.enemyRoute, body: payload, method: HttpMethod.Post }),
         getOne: ({ id }: GetEnemyParams) =>
@@ -43,7 +43,7 @@ class ApiClient {
         getMany: () => request<GetEnemiesResponse>({ url: this.enemyRoute, method: HttpMethod.Get }),
         deleteOne: ({ id }: DeleteEnemyParams) =>
             request<DeleteEnemyResponse>({ url: `${this.enemyRoute}/${id}`, method: HttpMethod.Delete }),
-    });
+    };
 }
 
 export default new ApiClient();

@@ -1,15 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import SectionTitle from '../../common/SectionTitle';
-import { useLocalize } from '../../../../localization/useLocalize';
-import CharacterLibrary from '../../../CharactersLibrary/CharactersLibrary';
-import { characters } from '../../../CharactersLibrary/mock';
-import { CharacterCardDetails } from '../../../CharactersLibrary/types';
+import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
+import { EnemyObjectResponse } from '@rpg/backend/src/routes/enemies/shared/types';
+import SectionTitle from '../../common/SectionTitle';
+import CharacterLibrary from '../../../CharactersLibrary/CharactersLibrary';
+import { CharacterCardDetails } from '../../../CharactersLibrary/types';
 import { setEditorSelectedEnemy } from '../../../../store/map/actions/setEditorSelectedEnemy';
 import { selectEditorEnemyData } from '../../../../store/map/selectors';
-import { Enemy } from '../../../../store/map/types';
+import client from '../../../../apiClient/client';
+import localize from '../../../../localization/localize';
 
-const getEnemyCardDetails = ({ id, imageUrl, level, name }: Enemy): CharacterCardDetails => ({
+const getEnemyCardDetails = ({ id, imageUrl, level, name }: EnemyObjectResponse): CharacterCardDetails => ({
     id,
     imageUrl,
     primaryDescription: name,
@@ -17,11 +18,11 @@ const getEnemyCardDetails = ({ id, imageUrl, level, name }: Enemy): CharacterCar
 });
 
 const EnemiesEditor: FunctionComponent = () => {
-    const localize = useLocalize();
     const dispatch = useDispatch();
     const editorEnemyData = useSelector(selectEditorEnemyData);
+    const { data = [] } = useQuery('enemies', client.enemy.getMany);
 
-    const onSelectCharacter = (enemy: Enemy) => {
+    const onSelectCharacter = (enemy: EnemyObjectResponse) => {
         dispatch(setEditorSelectedEnemy({ enemy }));
     };
 
@@ -31,7 +32,7 @@ const EnemiesEditor: FunctionComponent = () => {
         <>
             <SectionTitle>{localize('editEnemies')}</SectionTitle>
             <CharacterLibrary
-                characters={characters}
+                characters={data}
                 onSelect={onSelectCharacter}
                 selectedCharacterId={selectedEnemyId}
                 getCharacterCardDetails={getEnemyCardDetails}
