@@ -6,7 +6,7 @@ import { GetMapsResponse } from '@rpg/backend/src/routes/maps/getMaps';
 import { CreateEnemyBody, CreateEnemyResult } from '@rpg/backend/src/routes/enemies/createEnemy';
 import { GetEnemyParams, GetEnemyResult } from '@rpg/backend/src/routes/enemies/getEnemy';
 import { GetEnemiesResponse } from '@rpg/backend/src/routes/enemies/getEnemies';
-import { DeleteEnemyParams } from '@rpg/backend/src/routes/enemies/deleteEnemy';
+import { DeleteEnemyParams, DeleteEnemyResponse } from '@rpg/backend/src/routes/enemies/deleteEnemy';
 
 type RequestOptions = Omit<RequestInit, 'body'> & { url: string; body?: Record<string, any> };
 
@@ -24,7 +24,7 @@ const request = async <T>({ url, body, ...options }: RequestOptions): Promise<T>
 class ApiClient {
     baseUrl: string = 'http://localhost:3001/api';
     mapRoute: string = `${this.baseUrl}/maps`;
-    enemyRoute: string = `${this.baseUrl}/maps`;
+    enemyRoute: string = `${this.baseUrl}/enemies`;
 
     map = () => ({
         create: (payload: CreateMapBody) =>
@@ -42,7 +42,7 @@ class ApiClient {
             request<GetEnemyResult>({ url: `${this.enemyRoute}/${id}`, method: HttpMethod.Get }),
         getMany: () => request<GetEnemiesResponse>({ url: this.enemyRoute, method: HttpMethod.Get }),
         deleteOne: ({ id }: DeleteEnemyParams) =>
-            request({ url: `${this.enemyRoute}/${id}`, method: HttpMethod.Delete }),
+            request<DeleteEnemyResponse>({ url: `${this.enemyRoute}/${id}`, method: HttpMethod.Delete }),
     });
 }
 
