@@ -18,7 +18,6 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({ text, actions }) => {
     const actionsContainerClasses = useActionsContainerStyles();
     const toolbarClasses = useToolbarStyles();
 
-    console.log(actions);
     return (
         <>
             <AppBar position="fixed">

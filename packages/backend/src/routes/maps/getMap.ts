@@ -10,7 +10,7 @@ export type GetMapParams = { id: string };
 
 export type GetMapResponse = MapObjectResponse;
 
-export const validateGetMapParams = validate(
+const validateGetMapParams = validate(
     'params',
     object({
         id: string().objectId().required(),
@@ -28,4 +28,4 @@ const getMap: RequestHandler<GetMapParams> = async (req, res, next) => {
     return res.status(ResponseStatus.Success).json(sanitizeMap(map));
 };
 
-export default getMap;
+export default { handler: getMap, validators: [validateGetMapParams] };

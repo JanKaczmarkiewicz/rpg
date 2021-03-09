@@ -10,7 +10,7 @@ export type DeleteMapParams = { id: string };
 
 export type DeleteMapResponse = MapObjectResponse;
 
-export const validateDeleteMapParams = validate(
+const validateDeleteMapParams = validate(
     'params',
     object({
         id: string().objectId().required(),
@@ -28,4 +28,4 @@ const deleteMap: RequestHandler<DeleteMapParams> = async (req, res, next) => {
     return res.status(ResponseStatus.Success).json(sanitizeMap(map));
 };
 
-export default deleteMap;
+export default { handler: deleteMap, validators: [validateDeleteMapParams] };

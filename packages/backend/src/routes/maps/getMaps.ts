@@ -13,4 +13,4 @@ const getMaps: RequestHandler = async (req, res) => {
     return res.status(ResponseStatus.Success).json(maps.map(sanitizeMap));
 };
 
-export default getMaps;
+export default { handler: getMaps, validators: [] };

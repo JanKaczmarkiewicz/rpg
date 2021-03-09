@@ -1,14 +1,17 @@
 import { Router } from 'express';
-import deleteMap, { validateDeleteMapParams } from './deleteMap';
-import getMap, { validateGetMapParams } from './getMap';
-import createMap, { validateCreateMapBody } from './createMap';
+
+import deleteMap from './deleteMap';
+import getMap from './getMap';
+import createMap from './createMap';
+import updateMap from './updateMap';
 import getMaps from './getMaps';
 
 const router = Router();
 
-router.get('/', getMaps);
-router.get('/:id', validateGetMapParams, getMap);
-router.post('/', validateCreateMapBody, createMap);
-router.delete('/:id', validateDeleteMapParams, deleteMap);
+router.get('/', getMaps.validators, getMaps.handler);
+router.get('/:id', getMap.validators, getMap.handler);
+router.post('/', createMap.validators, createMap.handler);
+router.delete('/:id', deleteMap.validators, deleteMap.handler);
+router.patch('/:id', updateMap.validators, updateMap.handler);
 
 export default router;

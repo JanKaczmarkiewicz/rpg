@@ -1,10 +1,10 @@
 import { Schema, model, Document } from 'mongoose';
 import tileContentSchemas from './tileContentSchemas';
 import { ContentKind, CONTENT_DISCRIMINATION_KEY, Model } from '../../constants/constants';
-import Enemy, { EnemyDbObject } from '../Enemy/Enemy';
+import Enemy from '../Enemy/Enemy';
 
 type Content =
-    | { kind: ContentKind.Enemy; enemy: EnemyDbObject }
+    | { kind: ContentKind.Enemy; enemy: string }
     | { kind: ContentKind.Wall }
     | { kind: ContentKind.Empty }
     | { kind: ContentKind.Npc };
